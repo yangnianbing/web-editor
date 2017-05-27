@@ -6,27 +6,18 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex'
     export default{
-        
         data(){
             return {
-                menuItems : menuItems
+                
             }
-        }
+        },
+        computed : mapState({
+            menuItems : state => state.menuItems
+        })
     }
 
-    var menuItems = [{
-        name : 'File',
-        items : [
-            {
-                name : 'New File'
-            }, {
-                name : 'New Folder'
-            },{
-                name : 'Save'
-            }
-        ]
-    }]
 </script>
 
 <style lang="css">

@@ -7,8 +7,19 @@ export default new Vuex.Store({
         //get by store.state.x
         //mapState
         x : 1,
-        currentShowFile : 'test/test1/test3'
-
+        currentShowFile : 'test/test1/test3',
+        menuItems : [{
+            name : 'File',
+            items : [
+                {
+                    name : 'New File'
+                }, {
+                    name : 'New Folder'
+                },{
+                    name : 'Save'
+                }
+            ]
+        }]
     },
     mutations : {
         //call by store.commit('increment', param);

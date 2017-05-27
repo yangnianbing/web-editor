@@ -2,7 +2,7 @@
     <div class="breadcrumb">
         <ul>
             <li @click="changeCurrentOpenFile(index)" v-for="(path, index) in paths">
-                <i  v-if="index != paths.length-1" class="icon-folder iconfont"></i>
+                <i  v-if="index != paths.length-1" class="icon-close iconfont"></i>
                 <i v-if="index == paths.length-1" class="icon-form iconfont"></i>
                 <span>{{path}}</span>
                 <i  v-if="index != paths.length-1"  class="icon-more iconfont"></i>
