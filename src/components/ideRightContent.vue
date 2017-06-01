@@ -2,8 +2,8 @@
     
 </template>
 <script>
-    import ace from 'ace'
-    console.log(ace);
+    import editor from 'vue-monaco-editor'
+    console.log(editor);
     export default{
 
     }
