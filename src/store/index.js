@@ -7,7 +7,10 @@ export default new Vuex.Store({
         //get by store.state.x
         //mapState
         x : 1,
-        currentShowFile : 'test/test1/test3',
+        currentShowFile : 'test/test1/test3.java',
+        files:[{
+            'test/test1/test3' : 'content content content content'
+        }],
         menuItems : [{
             name : 'File',
             items : [

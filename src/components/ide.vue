@@ -1,10 +1,9 @@
 <template>
     <div class="ide-main-content">
-        <div class="ide-main-section up">
+        <div class="ide-main-section">
             <IdeLeftTree></IdeLeftTree>
             <IdeRightContent></IdeRightContent>
         </div>
-        <div class="ide-main-section down"></div>
     </div>
 </template>
 
@@ -26,6 +25,10 @@
         right: 26px;
         position: absolute;
         z-index: 1;
+    }
+
+    .ide-section{
+        position:absolute;
     }
 
     .ide-main-section{

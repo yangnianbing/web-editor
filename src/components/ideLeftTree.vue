@@ -1,5 +1,5 @@
 <template>
-    <div class="ide-left-tree">
+    <div class="ide-left-tree ide-section">
         <ul class="ide-left-tree-container">
             <item class="item" :model="treeData"></item>
         </ul>
@@ -52,6 +52,7 @@ var data = {
 
 <style lang="">
     .ide-left-tree{
+      left:0px;
       width:20%;
       height:100%;
     }
