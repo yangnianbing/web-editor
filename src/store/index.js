@@ -7,8 +7,8 @@ export default new Vuex.Store({
         //get by store.state.x
         //mapState
         x : 1,
-        currentShowFile : 'test/test1/test1.js',
-        openFiles : ['test/test1/test1.js'],
+        currentShowFile :{},
+        openFiles : [],
         files : {
             name : 'test',
             isFolder : true,

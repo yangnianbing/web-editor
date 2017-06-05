@@ -15,7 +15,7 @@
     export default{
         computed : {
             paths(){
-                return this.$store.state.currentShowFile.split('/');
+                return this.$store.state.currentShowFile.path ? this.$store.state.currentShowFile.path.split('/'):'';
             }
         },
         methods:{

@@ -7,11 +7,11 @@
             <i v-if="isFolder && !open" class="icon-close iconfont"></i>
             <i v-if="isFolder && open" class="icon-open iconfont"></i>
             <i v-if="!isFolder" class="icon-form iconfont"></i>
-            {{model.name}}    
+            {{modelWithPath.name}}    
         </div>
     
         <ul v-show="open" v-if="isFolder">
-            <item class="item" v-for="child in model.children" :model="child"></item>
+            <item class="item" v-for="child in modelWithPath.children" :model="child"></item>
         </ul>
     </li>
 </template>
@@ -29,14 +29,21 @@
                 open: false
             }
         },
-
+        computed : {
+            modelWithPath : function(){
+                var $vue = this;
+                $vue.model.isFolder &&  $vue.model.children.forEach(function(child){
+                    child.path =  $vue.model.path ? ( $vue.model.path + '/' + child.name) : ( $vue.model.name + '/' + child.name) ;
+                })
+                return $vue.model;
+            }
+        },
         methods: {
             toggle: function() {
                 if (this.model.isFolder) {
                     this.open = !this.open
                 }else{
-                    console.log(this.model);
-                    //this.$store.commit('setCurrentShowFile', {currentShowFile})
+                    this.$store.commit('setCurrentShowFile', {currentShowFile:this.model})
                 }
             },
             show : function(){
