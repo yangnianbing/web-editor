@@ -7,10 +7,45 @@ export default new Vuex.Store({
         //get by store.state.x
         //mapState
         x : 1,
-        currentShowFile : 'test/test1/test3.java',
-        files:[{
-            'test/test1/test3' : 'content content content content'
-        }],
+        currentShowFile : 'test/test1/test1.js',
+        openFiles : ['test/test1/test1.js'],
+        files : {
+            name : 'test',
+            isFolder : true,
+            children : [
+                {
+                    name : 'test1',
+                    isFolder : true,
+                    children : [
+                        {
+                            name : 'test1.js',
+                            isFolder : false,
+                            content : "content1"
+                        }
+                    ]
+                },{
+                    name : 'test2',
+                    isFolder : true,
+                    children : [
+                        {
+                            name : 'test2.j',
+                            isFolder : false,
+                            content : "content2"
+                        }
+                    ]
+                },{
+                    name : 'test3',
+                    isFolder : true,
+                    children : [
+                        {
+                            name : 'test3.js',
+                            isFolder : false,
+                            content : "content3"
+                        }
+                    ]
+                }
+            ]
+        },
         menuItems : [{
             name : 'File',
             items : [
@@ -32,6 +67,9 @@ export default new Vuex.Store({
         //})
         //mutations must be synchronous
         //map to component mapMutations
+        setCurrentShowFile(state, param){
+            state.currentShowFile = param.currentShowFile;
+        },
         increment(state, param){
             state.x++;
         }

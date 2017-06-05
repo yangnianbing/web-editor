@@ -1,7 +1,7 @@
 <template>
     <li class="ide-left-tree-item">
     
-        <div :class="{bold: isFolder}" @click="toggle">
+        <div :class="{bold:isFolder}" @click="toggle" @dbclick="show">
             <i v-if="isFolder && !open" class="icon-arrow-close iconfont"></i>
             <i v-if="isFolder && open" class="icon-arrow-open iconfont"></i>
             <i v-if="isFolder && !open" class="icon-close iconfont"></i>
@@ -11,7 +11,7 @@
         </div>
     
         <ul v-show="open" v-if="isFolder">
-            <item class="item" v-for="model in model.children" :model="model"></item>
+            <item class="item" v-for="child in model.children" :model="child"></item>
         </ul>
     </li>
 </template>
@@ -25,24 +25,26 @@
         },
         data: function() {
             return {
+                isFolder : this.model.isFolder,
                 open: false
             }
         },
-        computed: {
-            isFolder: function() {
-                return this.model.children &&
-                    this.model.children.length
-            }
-        },
+
         methods: {
             toggle: function() {
-                if (this.isFolder) {
+                if (this.model.isFolder) {
                     this.open = !this.open
+                }else{
+                    console.log(this.model);
+                    //this.$store.commit('setCurrentShowFile', {currentShowFile})
                 }
+            },
+            show : function(){
+
             },
             addChild: function() {
                 this.model.children.push({
-                    name: 'new stuff'
+                    name: ''
                 })
             }
         }

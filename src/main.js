@@ -11,7 +11,7 @@ $.ajaxSettings.crossDomain = true;
 
 // 实例化VueRouter
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes
 });
 

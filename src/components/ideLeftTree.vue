@@ -11,42 +11,18 @@
     export default{
         data(){
             return {
-                treeData : data
+                
             }
+        },
+        computed : {
+          treeData(){
+            return this.$store.state.files;
+          }
         },
         components:{
             item
         }
     }   
-
-var data = {
-  name: 'My Tree',
-  children: [
-    { name: 'hello' },
-    { name: 'wat' },
-    {
-      name: 'child folder',
-      children: [
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        },
-        { name: 'hello' },
-        { name: 'wat' },
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        }
-      ]
-    }
-  ]
-}
 
 </script>
 
