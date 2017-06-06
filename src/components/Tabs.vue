@@ -28,9 +28,6 @@
 
     export default {
         name : 'Tabs',
-        props: {
-
-        },
 
         data: () => ({
             tabs: [],
@@ -39,7 +36,6 @@
 
         created() {
             this.tabs = this.$children;
-
             this.$on('selectTab', function(id){
                 this.selectTab('#'+id);
             })

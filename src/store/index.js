@@ -71,10 +71,11 @@ export default new Vuex.Store({
             state.currentShowFile = param.currentShowFile;
             var areadyOpen = false;
             state.openFiles.every(function(file){
-                if(file == param.currentShowFile){
+                if(file.path == param.currentShowFile.path){
                     areadyOpen = true;
                     return false;
                 }
+                return true;
             })
             !areadyOpen && state.openFiles.push(param.currentShowFile);
         },

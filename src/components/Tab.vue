@@ -17,6 +17,7 @@
             name: { required: true },
             prefix: { default: '' },
             suffix: { default: '' },
+            select : false
         },
 
         data(){
@@ -24,8 +25,8 @@
                 isActive: false
             }
         },
-        mounted (){
-
+        created () {
+            this.isActive = this.select
         },
         computed: {
             header() {

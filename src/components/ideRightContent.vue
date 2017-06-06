@@ -1,11 +1,11 @@
 <template>
         <div class="ide-right-content ide-section">
                 <Tabs>
-                    <Tab :name="file.name" :id="file.path" v-for="file in openFiles">
+                    <Tab :name="file.name" :id="file.path" v-for="file in openFiles" :select='file.path == currentShowFile.path ? true : false'>
                              <MonacoEditor
                                 height="100%"
                                 language="typescript"
-                                srcPath="/public/monaco-editor/min"
+                                srcPath="/public/monaco-editor/dev"
                                 :changeThrottle="500"
                                 theme="vs-light"
                                 @mounted="onMounted"
@@ -34,23 +34,18 @@ module.exports = {
         };
     },
     computed : {
-        openFiles (){
+        currentShowFile : function(){
             var $vue = this;
-            this.$children.forEach(function(child){
-                child.$emit('selectTab', $vue.currentShowFile.path);
-            });
-            return this.$store.state.openFiles;
+            $vue.$children.forEach(function(child){
+                child.$emit('selectTab', $vue.$store.state.currentShowFile.path);
+            })
+            return $vue.$store.state.currentShowFile;
         },
         ... mapState({
-            currentShowFile:state => state.currentShowFile 
+            openFiles : state => state.openFiles,
         })
     },
-    // computed : mapState({
-    //         openFiles : state => state.openFiles,
-    //         currentShowFile (state){
-    //             console.log(1111);
-    //         }
-    // }),
+
     methods: {
         onMounted(editor) {
             console.log('after mount!', editor, editor.getValue(), editor.getModel());
