@@ -1,7 +1,7 @@
 <template>
         <div class="ide-right-content ide-section">
                 <Tabs>
-                    <Tab name="firstTab">
+                    <Tab :name="file.name" :id="file.path" v-for="file in openFiles">
                              <MonacoEditor
                                 height="100%"
                                 language="typescript"
@@ -12,16 +12,18 @@
                                 @codeChange="onCodeChange"
                             >
                     </Tab>
-                </Tabs>                  
+                </Tabs>  
         </div>
+        
 </template>
 
 <script>
     import MonacoEditor from 'vue-monaco-editor'
     import FileTable from './fileTable'
     import LanguageUtil from '../util/suffixMapLanguage'
-    import {Tabs, Tab} from 'vue-tabs-component'
-
+    import Tabs from './Tabs'
+    import Tab from './Tab'
+    import {mapState} from 'vuex'
 module.exports = {
     components: {
         MonacoEditor,FileTable, Tabs, Tab
@@ -31,6 +33,24 @@ module.exports = {
 
         };
     },
+    computed : {
+        openFiles (){
+            var $vue = this;
+            this.$children.forEach(function(child){
+                child.$emit('selectTab', $vue.currentShowFile.path);
+            });
+            return this.$store.state.openFiles;
+        },
+        ... mapState({
+            currentShowFile:state => state.currentShowFile 
+        })
+    },
+    // computed : mapState({
+    //         openFiles : state => state.openFiles,
+    //         currentShowFile (state){
+    //             console.log(1111);
+    //         }
+    // }),
     methods: {
         onMounted(editor) {
             console.log('after mount!', editor, editor.getValue(), editor.getModel());

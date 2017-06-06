@@ -69,6 +69,14 @@ export default new Vuex.Store({
         //map to component mapMutations
         setCurrentShowFile(state, param){
             state.currentShowFile = param.currentShowFile;
+            var areadyOpen = false;
+            state.openFiles.every(function(file){
+                if(file == param.currentShowFile){
+                    areadyOpen = true;
+                    return false;
+                }
+            })
+            !areadyOpen && state.openFiles.push(param.currentShowFile);
         },
         increment(state, param){
             state.x++;
