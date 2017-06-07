@@ -6,6 +6,8 @@ import routes from './routers';
 import store from './store/index'
 
 Vue.use(VueRouter);
+Vue.config.debug = true;
+Vue.config.devtools = true;
 
 $.ajaxSettings.crossDomain = true;
 

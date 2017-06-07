@@ -12,10 +12,13 @@
         import ToolBar from '../components/toolBar'
         import Ide from '../components/ide'
         import ToolSlide from '../components/toolSlide'
+        import {GridItem, GridLayout} from 'vue-grid-layout'
         import '../assets/css/index.css'
+
+        console.log(GridItem, GridLayout)
         export default{
             name : 'app',
-            components : {TopBar, ToolBar, Ide, ToolSlide}
+            components : {TopBar, ToolBar, Ide, ToolSlide, GridLayout, GridItem}
         }
 </script>
 

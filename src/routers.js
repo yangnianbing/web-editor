@@ -1,6 +1,6 @@
 const Home = resolve => {
-    require.ensure(['./views/index.vue'], () => {
-        resolve(require('./views/index.vue'));
+    require.ensure(['./views/layout.vue'], () => {
+        resolve(require('./views/layout.vue'));
     });
 };
 

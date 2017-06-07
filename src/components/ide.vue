@@ -19,10 +19,14 @@
 
 <style lang="css">
     .ide-main-content{
-        bottom: 52px;
+        /*bottom: 52px;
         top: 50px;
         left: 26px;
-        right: 26px;
+        right: 26px;*/
+        bottom: 0px;
+        top: 50px;
+        left: 0px;
+        right: 0px;
         position: absolute;
         z-index: 1;
     }
