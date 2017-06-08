@@ -1,28 +1,22 @@
 
 <script>
+var rowHeight = 10;
+var num = window.innerHeight / rowHeight;
 var testLayout = [
-    {"x":0,"y":0,"w":2,"h":2,"i":"0"},
-    {"x":2,"y":0,"w":2,"h":4,"i":"1"},
-    {"x":4,"y":0,"w":2,"h":5,"i":"2"},
-    {"x":6,"y":0,"w":2,"h":3,"i":"3"},
-    {"x":8,"y":0,"w":2,"h":3,"i":"4"},
-    {"x":10,"y":0,"w":2,"h":3,"i":"5"},
-    {"x":0,"y":5,"w":2,"h":5,"i":"6"},
-    {"x":2,"y":5,"w":2,"h":5,"i":"7"},
-    {"x":4,"y":5,"w":2,"h":5,"i":"8"},
-    {"x":6,"y":4,"w":2,"h":4,"i":"9"},
-    {"x":8,"y":4,"w":2,"h":4,"i":"10"},
-    {"x":10,"y":4,"w":2,"h":4,"i":"11"},
-    {"x":0,"y":10,"w":2,"h":5,"i":"12"},
-    {"x":2,"y":10,"w":2,"h":5,"i":"13"},
-    {"x":4,"y":8,"w":2,"h":4,"i":"14"},
-    {"x":6,"y":8,"w":2,"h":4,"i":"15"},
-    {"x":8,"y":10,"w":2,"h":5,"i":"16"},
-    {"x":10,"y":4,"w":2,"h":2,"i":"17"},
-    {"x":0,"y":9,"w":2,"h":3,"i":"18"},
-    {"x":2,"y":6,"w":2,"h":2,"i":"19"}
+    {"x":0,"y":0,"w":10,"h":2.5,"i":"0", 'type':'component', 'content':'TopBar', 'd':false, 'r':false},
+    {"x":0,"y":2.5,"w":10,"h":2.4,"i":"0", 'type':'component', 'content':'ToolBar','d':false,'r':false},
+    {"x":0,"y":4.9,"w":2,"h":num-4.9,"i":"0", 'type':'component', 'content':'IdeLeftTree'},
+    {"x":2,"y":4.9,"w":8,"h":num-4.9,"i":"0", 'type':'component', 'content':'IdeRightContent'}
 ];
 import {GridLayout, GridItem} from 'vue-grid-layout'
+
+import TopBar from '../components/topBar'
+import ToolBar from '../components/toolBar'
+import IdeLeftTree from '../components/ideLeftTree'
+import IdeRightContent from '../components/ideRightContent'
+
+import '../assets/css/index.css'
+
 export default {
     data(){
         return {
@@ -30,18 +24,19 @@ export default {
         }
     },
     components : {
-        GridLayout,GridItem
+        GridLayout,GridItem,TopBar, ToolBar,IdeLeftTree,IdeRightContent
     },
     render(createElement){
         return createElement('grid-layout', {
                 props : {
                     layout : this.layout,
-                    'col-num' : 12,
-                    'row-height':30,
+                    'col-num' : 10,
+                    'row-height':rowHeight,
                     'is-draggable':true,
                     'is-resizable':true,
                     'vertical-compact':true,
-                    'use-css-transforms':true
+                    'use-css-transforms':true,
+                    margin : [0, 0]
                 }
             },
             this.layout.map(item => 
@@ -51,8 +46,18 @@ export default {
                         y : item.y,
                         w:item.w,
                         h:item.h,
+                        i : item.i,
+                        'is-draggable':item.d === false ? false : true,
+                        'is-resizable':item.r === false ? false : true
                     }
-                })
+                }, (function(){
+                    if(item.type == 'component'){
+                        return [createElement(item.content)]
+                    }else if(item.type){
+                        return [createElement('span', item.content)]
+                    }
+                })()
+                )
             )
         )
     }
@@ -60,7 +65,12 @@ export default {
 
 </script>
 
-
 <style>
+    .vue-grid-item .ide-left-tree{
+        width: 100%;
+    }
 
+    .vue-grid-item .ide-right-content{
+        width: 100%;
+    }
 </style>
