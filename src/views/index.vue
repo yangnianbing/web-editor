@@ -13,6 +13,7 @@
         import Ide from '../components/ide'
         import ToolSlide from '../components/toolSlide'
         import '../assets/css/index.css'
+        import 'element-ui/lib/theme-default/index.css'
 
         export default{
             name : 'app',
