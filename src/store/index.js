@@ -57,6 +57,8 @@ export default new Vuex.Store({
                     name : 'Save'
                 }
             ]
+        },{
+            name : 'Edit'
         }]
     },
     mutations : {

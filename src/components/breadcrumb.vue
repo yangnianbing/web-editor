@@ -32,4 +32,8 @@
         margin:0px;
         padding:0px;
     }
+
+    .breadcrumb ul li{
+        display: inline;
+    }
 </style>

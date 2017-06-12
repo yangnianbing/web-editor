@@ -39,4 +39,8 @@
       overflow : auto;
       padding-left: 0px;
     }
+    
+    .ide-left-tree ul{
+        list-style: none;
+    }
 </style>

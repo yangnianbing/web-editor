@@ -22,11 +22,8 @@
 </script>
 
 <style lang="css">
-    ul{
-        list-style: none;
-    }
-    ul li{
-        display : inline;
+    .ide{
+        height: 100%;
     }
     
 </style>

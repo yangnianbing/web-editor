@@ -4,7 +4,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routers';
 import store from './store/index'
-console.log(store);
+
 Vue.use(VueRouter);
 Vue.config.debug = true;
 Vue.config.devtools = true;
@@ -23,3 +23,4 @@ new Vue({
     router,
     store
 }).$mount('#app');
+
