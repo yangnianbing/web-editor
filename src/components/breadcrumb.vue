@@ -12,6 +12,8 @@
 </template>
 
 <script>
+     import idGenerator from '../comet/idGenerator'
+
     export default{
 
         computed : {
