@@ -5,6 +5,7 @@
                 <i  v-if="index != paths.length-1 || paths.length == 1" class="icon-close iconfont"></i>
                 <i v-if="index == paths.length-1 && paths.length != 1" class="icon-form iconfont"></i>
                 <span>{{path}}</span>
+                
                 <i  v-if="index != paths.length-1"  class="icon-more iconfont"></i>
             </li>
         </ul>
