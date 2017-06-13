@@ -24,6 +24,9 @@
     import Tabs from './Tabs'
     import Tab from './Tab'
     import {mapState} from 'vuex'
+
+    import {send} from '../comet/comet'
+
 module.exports = {
     components: {
         MonacoEditor,FileTable, Tabs, Tab
@@ -52,6 +55,9 @@ module.exports = {
             this.editor = editor;
         },
         onCodeChange(editor) {
+            send('test', function(e){
+                console.log(arguments);
+            })
             console.log('code changed!', 'code:' + this.editor.getValue());
         },
         clickHandler() {

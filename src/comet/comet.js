@@ -3,8 +3,8 @@ import idGenerator from './idGenerator'
 var handlerPoll = {};
 var serverHost = 'ws://localhost/ws';
 
-export   function registerSocket(fn){
-    if(!window.connect){
+function registerSocket(fn){
+    if(!window.connection){
         comet();
     }
     if(fn && typeof fn === 'function'){
@@ -15,22 +15,33 @@ export   function registerSocket(fn){
     return null;
 }
 
+function send(msg, fn){
+    if(!window.connection){
+        comet({onOpen : function(){
+            window.connection.send(JSON.stringify(json));
+        }});
+    }else{
+         window.connection.send(JSON.stringify(json));
+    }
+}
 
-export function comet(){
-    if(window.connect){
+
+function comet(params){
+    if(window.connection){
         return;
     }
     var WebSocket = window.WebSocket;
-    var connect = window.connect = new WebSocket(serverHost);
+    var connection = window.connection = new WebSocket(serverHost);
 
-    if(connect){
-        connect.onopen = onOpen;
-        connect.onclose = onClose;
-        connect.onmessage = onMessage;
-        connect.onerror = onError;
+    if(connection){
+        connection.onopen = onOpen;
+        connection.onclose = onClose;
+        connection.onmessage = onMessage;
+        connection.onerror = onError;
     }
     
     function onOpen(e){
+        params.onOpen && params.onOpen(e);
         console.log('socket connect', e);
     }
     function onClose(e){
@@ -52,3 +63,5 @@ export function comet(){
     }
 
 }
+
+export {registerSocket, send}
