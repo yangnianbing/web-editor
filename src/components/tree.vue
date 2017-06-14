@@ -45,6 +45,7 @@
                 }else{
                     this.$store.commit('setCurrentShowFile', {currentShowFile:this.model})
                 }
+                this.$store.commit('setCurrentSelectFile', {currentSelectFile:this.model})
             },
             show : function(){
 

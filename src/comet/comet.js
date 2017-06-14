@@ -1,7 +1,7 @@
 import idGenerator from './idGenerator'
 
 var handlerPoll = {};
-var serverHost = 'ws://localhost/ws';
+var serverHost = 'ws://localhost:8888';
 
 function registerSocket(fn){
     if(!window.connection){
@@ -18,10 +18,10 @@ function registerSocket(fn){
 function send(msg, fn){
     if(!window.connection){
         comet({onOpen : function(){
-            window.connection.send(JSON.stringify(json));
+            window.connection.send(JSON.stringify(msg));
         }});
     }else{
-         window.connection.send(JSON.stringify(json));
+         window.connection.send(JSON.stringify(msg));
     }
 }
 

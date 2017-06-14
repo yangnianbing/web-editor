@@ -8,6 +8,7 @@ export default new Vuex.Store({
         //mapState
         x : 1,
         currentShowFile :{},
+        currentSelectFile : {},
         openFiles : [],
         files : {
             name : 'test',
@@ -50,11 +51,17 @@ export default new Vuex.Store({
             name : 'File',
             items : [
                 {
-                    name : 'New File'
+                    name : 'New File',
+                    commander : 'createFile'
                 }, {
-                    name : 'New Folder'
+                    name : 'New Folder',
+                    commander : 'createFile'
                 },{
-                    name : 'Save'
+                    name : 'New Component',
+                    commander : 'createFile'
+                },{
+                    name : 'Save As',
+                    commander : 'createFile'
                 }
             ]
         },{
@@ -80,6 +87,10 @@ export default new Vuex.Store({
                 return true;
             })
             !areadyOpen && state.openFiles.push(param.currentShowFile);
+        },
+
+        setCurrentSelectFile(state, param){
+            state.currentSelectFile = param.currentSelectFile;
         },
         increment(state, param){
             state.x++;

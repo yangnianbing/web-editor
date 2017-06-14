@@ -5,7 +5,7 @@
                 <el-menu-item v-if="!menuItem.items" index="index">{{menuItem.name}}</el-menu-item>
                 <el-submenu v-if="menuItem.items" index="index">
                     <template slot="title">{{menuItem.name}}</template>
-                     <el-menu-item v-for="(subMenuItem, subIndex) in menuItem.items" index="index + '-'  + subIndex">
+                     <el-menu-item v-for="(subMenuItem, subIndex) in menuItem.items" @click="executeCommander(subMenuItem.commander)" index="index + '-'  + subIndex">
                         {{subMenuItem.name}}
                      </el-menu-item>
                 </el-submenu>
@@ -17,7 +17,8 @@
 <script>
     import {mapState} from 'vuex'
     import {Menu, Submenu, MenuItem} from 'element-ui'
-
+    import commander from '../commander/index';
+    console.log(commander);
     export default{
         data(){
             return {
@@ -27,7 +28,12 @@
         computed : mapState({
             menuItems : state => state.menuItems
         }),
-
+        methods : {
+            executeCommander(commander){
+                this[commander]();
+            }
+        },
+        mixins :[commander],
         components : {
             ElMenu : Menu,
             ElSubmenu:Submenu,

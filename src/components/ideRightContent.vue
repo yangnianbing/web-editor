@@ -6,7 +6,7 @@
                                 height="100%"
                                 language="typescript"
                                 srcPath="/public/monaco-editor/dev"
-                                :changeThrottle="500"
+                                :changeThrottle="1000"
                                 theme="vs-light"
                                 @mounted="onMounted"
                                 @codeChange="onCodeChange"
@@ -26,6 +26,8 @@
     import {mapState} from 'vuex'
 
     import {send} from '../comet/comet'
+    import {Message, Action} from '../comet/Message'
+    import { MessageBox } from 'element-ui';
 
 module.exports = {
     components: {
@@ -49,18 +51,51 @@ module.exports = {
         })
     },
 
+    created(){
+        var $vue = this;
+        window.addEventListener('keydown', e => {
+            if( e.ctrlKey  == true && e.keyCode == 83 ){
+                if($vue.$store.state.currentShowFile.type == 'tmp'){
+                    this.popupSave();
+                }
+                e.preventDefault();
+            }
+        })
+    },
+
     methods: {
         onMounted(editor) {
-            console.log('after mount!', editor, editor.getValue(), editor.getModel());
             this.editor = editor;
         },
         onCodeChange(editor) {
-            send('test', function(e){
-                console.log(arguments);
+            var message = new Message(Action.FILE_MODIFY, {content:this.editor.getValue()});
+            send(message, function(e){
+
             })
-            console.log('code changed!', 'code:' + this.editor.getValue());
         },
-        clickHandler() {
+        popupSave(){
+            var currentSelectFile = this.$store.state.currentSelectFile;
+            var path = currentSelectFile.isFolder ? currentSelectFile.path : currentSelectFile.path;
+            MessageBox.prompt('请输入路径', '保存', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                inputValue : path
+            }).then(({ value }) => {
+                    var message = new Message(Action.FILE_ADD, {content:this.editor.getValue()});
+                    send(message, function(e){
+
+                    })
+                    this.$message({
+                        type: 'success',
+                        message: '你的邮箱是: ' + value
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '取消输入'
+                    });       
+                }
+            );
         }
     },
 };
