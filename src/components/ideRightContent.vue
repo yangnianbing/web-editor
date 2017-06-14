@@ -83,19 +83,12 @@ module.exports = {
             }).then(({ value }) => {
                     var message = new Message(Action.FILE_ADD, {content:this.editor.getValue()});
                     send(message, function(e){
-
+                            this.$message({
+                            type: 'success',
+                            message: '保存文件成功'
+                        });
                     })
-                    this.$message({
-                        type: 'success',
-                        message: '你的邮箱是: ' + value
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '取消输入'
-                    });       
-                }
-            );
+                })
         }
     },
 };
