@@ -18,7 +18,7 @@
     import {mapState} from 'vuex'
     import {Menu, Submenu, MenuItem} from 'element-ui'
     import commander from '../commander/index';
-    console.log(commander);
+
     export default{
         data(){
             return {
@@ -32,6 +32,12 @@
             executeCommander(commander){
                 this[commander]();
             }
+        },
+        created(){
+            var $eventBus = this.$store.state.$eventBus;
+            $eventBus.$on('saveFile', () => {
+                this['saveFile']();
+            })
         },
         mixins :[commander],
         components : {

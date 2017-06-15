@@ -17,7 +17,20 @@
 
         export default{
             name : 'app',
-            components : {TopBar, ToolBar, Ide, ToolSlide}
+            components : {TopBar, ToolBar, Ide, ToolSlide},
+
+            created(){
+                var $eventBus = this.$store.state.$eventBus;
+                var $vue = this;
+                 window.addEventListener('keydown', e => {
+                    if( e.ctrlKey  == true && e.keyCode == 83 ){
+                        if($vue.$store.state.currentShowFile.type == 'tmp'){
+                            $eventBus.$emit('saveFile');
+                        }
+                        e.preventDefault();
+                    }
+                })
+            }
         }
 </script>
 

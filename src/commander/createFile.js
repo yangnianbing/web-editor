@@ -1,5 +1,3 @@
-
-
 function createFile(){
     var $store = this.$store;
     var max = '';
@@ -22,4 +20,6 @@ function createFile(){
     $store.commit('setCurrentShowFile', {currentShowFile : {name:'Untitled-' + max, path : 'Untitled-' + max, folder : false, content:'', type:'tmp'}});
 }
 
-export {createFile}
+
+
+export default createFile;

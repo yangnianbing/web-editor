@@ -20,6 +20,7 @@ var Action = {
     FILE_DELETE : 1,
     FILE_ADD : 2,
     FILE_RENAME : 3,
+    FILE_MOVE : 4
 }
 
 export {

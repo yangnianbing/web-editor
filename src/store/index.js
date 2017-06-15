@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {Action} from '../comet/Message'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
     state : {  
         //get by store.state.x
         //mapState
+        $eventBus : new Vue(),
         x : 1,
         currentShowFile :{},
         currentSelectFile : {},
@@ -91,9 +93,6 @@ export default new Vuex.Store({
 
         setCurrentSelectFile(state, param){
             state.currentSelectFile = param.currentSelectFile;
-        },
-        increment(state, param){
-            state.x++;
         }
     },
     actions : {
@@ -104,6 +103,18 @@ export default new Vuex.Store({
         incrment(context){
             //can do some async operations
             context.commit('increment')
+        },
+
+        //增删查改移动文件
+        crudmFile(context, param){
+            switch(param.action){
+                case Action.FILE_ADD:
+                case Action.FILE_DELETE:
+                case Action.FILE_MODIFY:
+                case Action.FILE_RENAME:
+                case Action.FILE_MOVE:
+                    console.log(param.content);
+            }
         }
     },
     getters : {

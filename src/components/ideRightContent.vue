@@ -1,7 +1,7 @@
 <template>
         <div class="ide-right-content ide-section">
-                <Tabs>
-                    <Tab :name="file.name" :id="file.path" v-for="file in openFiles" :select='file.path == currentShowFile.path ? true : false'>
+                <Tabs @onTabChange="onTabChange">
+                    <Tab :name="file.name" :id="file.path" :model="file" v-for="file in openFiles" :select='file.path == currentShowFile.path ? true : false'>
                              <MonacoEditor
                                 height="100%"
                                 language="typescript"
@@ -18,16 +18,12 @@
 </template>
 
 <script>
-    import MonacoEditor from 'vue-monaco-editor'
-    import FileTable from './fileTable'
-    import LanguageUtil from '../util/suffixMapLanguage'
-    import Tabs from './Tabs'
-    import Tab from './Tab'
-    import {mapState} from 'vuex'
-
-    import {send} from '../comet/comet'
-    import {Message, Action} from '../comet/Message'
-    import { MessageBox } from 'element-ui';
+import MonacoEditor from 'vue-monaco-editor'
+import FileTable from './fileTable'
+import LanguageUtil from '../util/suffixMapLanguage'
+import Tabs from './Tabs'
+import Tab from './Tab'
+import {mapState} from 'vuex'
 
 module.exports = {
     components: {
@@ -50,45 +46,16 @@ module.exports = {
             openFiles : state => state.openFiles,
         })
     },
-
-    created(){
-        var $vue = this;
-        window.addEventListener('keydown', e => {
-            if( e.ctrlKey  == true && e.keyCode == 83 ){
-                if($vue.$store.state.currentShowFile.type == 'tmp'){
-                    this.popupSave();
-                }
-                e.preventDefault();
-            }
-        })
-    },
-
     methods: {
         onMounted(editor) {
             this.editor = editor;
         },
         onCodeChange(editor) {
-            var message = new Message(Action.FILE_MODIFY, {content:this.editor.getValue()});
-            send(message, function(e){
-
-            })
+            this.$store.state.currentShowFile.content = this.editor.getValue();
+            this.$store.commit('setCurrentShowFile', {currentShowFile :this.$store.state.currentShowFile});
         },
-        popupSave(){
-            var currentSelectFile = this.$store.state.currentSelectFile;
-            var path = currentSelectFile.isFolder ? currentSelectFile.path : currentSelectFile.path;
-            MessageBox.prompt('请输入路径', '保存', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                inputValue : path
-            }).then(({ value }) => {
-                    var message = new Message(Action.FILE_ADD, {content:this.editor.getValue()});
-                    send(message, function(e){
-                            this.$message({
-                            type: 'success',
-                            message: '保存文件成功'
-                        });
-                    })
-                })
+        onTabChange(tab){
+            console.log(11);
         }
     },
 };

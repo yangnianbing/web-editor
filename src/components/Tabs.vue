@@ -42,13 +42,6 @@
         },
 
         mounted() {
-            window.addEventListener('hashchange', () => this.selectTab(window.location.hash));
-
-            if (this.findTab(window.location.hash)) {
-                this.selectTab(window.location.hash);
-                return;
-            }
-
             if (this.tabs.length) {
                 this.selectTab(this.tabs[0].hash);
             }
@@ -60,6 +53,7 @@
             },
 
             selectTab(selectedTabHash) {
+                debugger;
                 const selectedTab = this.findTab(selectedTabHash);
 
                 if (! selectedTab) {
@@ -68,11 +62,7 @@
                 this.tabs.forEach(tab => { 
                     tab.isActive = (tab.hash === selectedTab.hash);
                 });
-
-                //this.$emit('changed', { tab: selectedTab });
-
                 this.activeTabHash = selectedTab.hash;
-
             },
         },
     };

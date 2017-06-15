@@ -17,7 +17,8 @@
             name: { required: true },
             prefix: { default: '' },
             suffix: { default: '' },
-            select : false
+            select : false,
+            model : Object
         },
 
         data(){
