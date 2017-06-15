@@ -2,11 +2,13 @@ function createFile(){
     var $store = this.$store;
     var max = '';
     var allUntitled = $store.state.openFiles.map(function(openFile){
-        if(openFile.name.startsWith('Untitled')){
-            return openFile.name.split('-')[1];
+        if(openFile.type == 'tmp'){
+            return parseInt(openFile.name.split('-')[1]);
         }
     });
-    allUntitled.sort().every((item, index) => {
+    allUntitled.sort((a, b) => {
+        return a < b ?  -1 : 1;
+    }).every((item, index) => {
         if(item != index + 1){
             max = index+1;
             return false;

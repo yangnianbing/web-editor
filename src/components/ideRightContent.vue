@@ -1,8 +1,8 @@
 <template>
         <div class="ide-right-content ide-section">
-                <Tabs @onTabChange="onTabChange">
-                    <Tab :name="file.name" :id="file.path" :model="file" v-for="file in openFiles" :select='file.path == currentShowFile.path ? true : false'>
-                             <MonacoEditor
+                <Tabs v-model="currentShowFile.path" type="card"  addable @tab-click="handleTabClick"  @edit="handleTabsEdit">
+                    <TabPane  v-for="file in openFiles" :key="file.path" closable  :label="file.name" :name="file.path">
+                            <MonacoEditor
                                 height="100%"
                                 language="typescript"
                                 srcPath="/public/monaco-editor/dev"
@@ -11,8 +11,11 @@
                                 @mounted="onMounted"
                                 @codeChange="onCodeChange"
                             >
-                    </Tab>
-                </Tabs>  
+                    </TabPane>
+                    <TabPane :disabled="false" :closable="false">
+                            <span slot="label"><i class="el-icon-date"></i> </span>
+                    </TabPane>
+                </Tabs>
         </div>
         
 </template>
@@ -21,13 +24,13 @@
 import MonacoEditor from 'vue-monaco-editor'
 import FileTable from './fileTable'
 import LanguageUtil from '../util/suffixMapLanguage'
-import Tabs from './Tabs'
-import Tab from './Tab'
 import {mapState} from 'vuex'
+
+import {Tabs, TabPane} from 'element-ui'
 
 module.exports = {
     components: {
-        MonacoEditor,FileTable, Tabs, Tab
+        MonacoEditor,FileTable, Tabs, TabPane
     },
     data() {
         return {
@@ -54,8 +57,14 @@ module.exports = {
             this.$store.state.currentShowFile.content = this.editor.getValue();
             this.$store.commit('setCurrentShowFile', {currentShowFile :this.$store.state.currentShowFile});
         },
-        onTabChange(tab){
-            console.log(11);
+        handleTabsEdit(targetName, action){
+            if(action === 'remove' ){
+
+            }
+        },
+        handleTabClick(){
+            console.log(arguments, 'click');
+            return false;
         }
     },
 };
@@ -68,38 +77,24 @@ module.exports = {
         right:0px;
     }
 
-    .ide-right-content .tabs-component{
-        height: 100%
+    .ide-right-content .el-tabs{
+        height : 100%;
     }
 
-    .ide-right-content ul.tabs-component-tabs{
-        border-bottom: 1px solid #eef2f4;
-        margin: 0px;
-        padding-left: 0px;
+    .ide-right-content .el-tabs .el-tab-pane{
+        height: 100%;
     }
 
-     .ide-right-content ul.tabs-component-tabs li{
-        height:30px;
-        line-height: 30px;
-        display: inline-block;
-        padding: 0 10px;
-    }
-
-    .ide-right-content ul.tabs-component-tabs li.is-active{
-        border-left: 1px solid #eef2f4;
-        border-right:1px solid #eef2f4;
-        box-shadow: inset 0 2px 0 #00aaef;
-    }
-    .ide-right-content ul.tabs-component-tabs li a{
-        text-decoration: none;
-    }
-
-     .ide-right-content div.tabs-component-panels{
-         height : calc(100% - 30px)
+     .ide-right-content .el-tabs .el-tabs__content{
+         height : calc(100% - 42px)
      }
 
-      .ide-right-content div.tabs-component-panels section.tabs-component-panel{
-          height: 100%;
-      }
+     .ide-right-content .el-tabs .el-tabs__header{
+         margin-bottom: 1px;
+     }
+
+     .ide-right-content .el-tabs .el-tabs__header .el-tabs__nav:last-child {
+         margin-bottom: 1px;
+     }
 
 </style>
