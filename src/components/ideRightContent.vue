@@ -1,7 +1,7 @@
 <template>
         <div class="ide-right-content ide-section">
-                <Tabs v-model="currentShowFile.path" type="card"  addable @tab-click="handleTabClick"  @edit="handleTabsEdit">
-                    <TabPane  v-for="file in openFiles" :key="file.path" closable  :label="file.name" :name="file.path">
+                <Tabs v-model="currentShowFileIndex" type="card"  addable @tab-click="handleTabClick"  @edit="handleTabsEdit">
+                    <TabPane v-for="(file,index) in openFiles" :key="'' + index" closable  :label="file.name" :name="'' + index">
                             <MonacoEditor
                                 height="100%"
                                 language="typescript"
@@ -10,10 +10,10 @@
                                 theme="vs-light"
                                 @mounted="onMounted"
                                 @codeChange="onCodeChange"
-                            >
+                            ></MonacoEditor>
                     </TabPane>
                     <TabPane :disabled="false" :closable="false">
-                            <span slot="label"><i class="el-icon-date"></i> </span>
+                            <span slot="label"><i class="add-button icon-add iconfont"></i> </span>
                     </TabPane>
                 </Tabs>
         </div>
@@ -22,30 +22,33 @@
 
 <script>
 import MonacoEditor from 'vue-monaco-editor'
-import FileTable from './fileTable'
 import LanguageUtil from '../util/suffixMapLanguage'
 import {mapState} from 'vuex'
 
-import {Tabs, TabPane} from 'element-ui'
+import {Tabs, TabPane, MessageBox} from 'element-ui'
 
 module.exports = {
     components: {
-        MonacoEditor,FileTable, Tabs, TabPane
+        MonacoEditor, Tabs, TabPane
     },
     data() {
         return {
-
         };
     },
     computed : {
-        currentShowFile : function(){
-            var $vue = this;
-            $vue.$children.forEach(function(child){
-                child.$emit('selectTab', $vue.$store.state.currentShowFile.path);
-            })
-            return $vue.$store.state.currentShowFile;
-        },
         ... mapState({
+            currentShowFile : state => state.currentShowFile,
+            currentShowFileIndex(state){
+                var currentIndex = state.openFiles.length-1;
+                state.openFiles.every(function(file, index){
+                    if(file.path == currentIndex.path){
+                        currentIndex = index;
+                        return false;
+                    }
+                    return true;
+                })
+                return currentIndex+'';
+            },
             openFiles : state => state.openFiles,
         })
     },
@@ -55,19 +58,41 @@ module.exports = {
         },
         onCodeChange(editor) {
             this.$store.state.currentShowFile.content = this.editor.getValue();
-            this.$store.commit('setCurrentShowFile', {currentShowFile :this.$store.state.currentShowFile});
+            //this.$store.commit('setCurrentShowFile', {currentShowFile :this.$store.state.currentShowFile});
         },
         handleTabsEdit(targetName, action){
+            var $eventBus = this.$store.state.$eventBus;
             if(action === 'remove' ){
-
+                var toBeRemove = this.openFiles[targetName];
+                if(toBeRemove.type == 'tmp'){
+                    MessageBox.confirm('关闭之前是否保存文件', '关闭', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                    }).then(() => {
+                        $eventBus.$emit('saveFile')
+                    })
+                }else{
+                    this.openFiles.splice(parseInt(targetName),1);
+                }
             }
         },
-        handleTabClick(){
-            console.log(arguments, 'click');
-            return false;
+        handleTabClick(tab, evt){
+            var $vue = this;
+            var $eventBus = $vue.$store.state.$eventBus;
+            console.log(tab);
+            if(isAddButton(evt.target)){
+                 $eventBus.$emit('createFile');
+            }else{
+                console.log($vue.$store.state.openFiles[tab.index]);
+                $vue.$store.commit('setCurrentShowFile', {currentShowFile:$vue.$store.state.openFiles[tab.index]})
+            }
         }
     },
 };
+
+function isAddButton(target){
+    return target.querySelectorAll('i.add-button').length > 0;
+}
 </script>
 
 <style lang="css">

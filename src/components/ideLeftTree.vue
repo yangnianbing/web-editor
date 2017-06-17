@@ -1,7 +1,7 @@
 <template>
     <div class="ide-left-tree ide-section">
-        <ul class="ide-left-tree-container">
-            <item class="item" :model="treeData"></item>
+        <ul class="ide-left-tree-container" v-for="(tree, index) in treeData">
+            <item class="item" :model="tree"></item>
         </ul>
     </div>
 </template>

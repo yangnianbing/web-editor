@@ -38,6 +38,9 @@
             $eventBus.$on('saveFile', () => {
                 this['saveFile']();
             })
+            $eventBus.$on('createFile', (... param)=>{
+                this['createFile']();
+            })
         },
         mixins :[commander],
         components : {

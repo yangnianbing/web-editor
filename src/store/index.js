@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {Action} from '../comet/Message'
+import {send} from '../comet/comet'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -12,7 +13,7 @@ export default new Vuex.Store({
         currentShowFile :{},
         currentSelectFile : {},
         openFiles : [],
-        files : {
+        files : {'test': {
             name : 'test',
             isFolder : true,
             children : [
@@ -48,7 +49,7 @@ export default new Vuex.Store({
                     ]
                 }
             ]
-        },
+        }},
         menuItems : [{
             name : 'File',
             items : [
@@ -93,7 +94,8 @@ export default new Vuex.Store({
 
         setCurrentSelectFile(state, param){
             state.currentSelectFile = param.currentSelectFile;
-        }
+        },
+
     },
     actions : {
         //call action by store.dispatch('increment')
@@ -107,8 +109,12 @@ export default new Vuex.Store({
 
         //增删查改移动文件
         crudmFile(context, param){
+            console.log(param)
             switch(param.action){
                 case Action.FILE_ADD:
+                    send(param.model).then(() => {
+                        
+                    });
                 case Action.FILE_DELETE:
                 case Action.FILE_MODIFY:
                 case Action.FILE_RENAME:
