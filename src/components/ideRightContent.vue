@@ -91,7 +91,7 @@ module.exports = {
 };
 
 function isAddButton(target){
-    return target.querySelectorAll('i.add-button').length > 0;
+    return target.querySelectorAll('i.add-button').length > 0 || target.classList.contains('add-button');
 }
 </script>
 

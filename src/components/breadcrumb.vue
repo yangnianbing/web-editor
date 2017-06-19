@@ -19,7 +19,7 @@
 
         computed : {
             paths(){
-                return this.$store.state.currentShowFile.path ? this.$store.state.currentShowFile.path.split('/'):[this.$store.state.files.name];
+                return this.$store.state.currentShowFile.path ? this.$store.state.currentShowFile.path.split('/'):'';
             }
         },
         methods:{

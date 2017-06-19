@@ -109,7 +109,7 @@ export default new Vuex.Store({
 
         //增删查改移动文件
         crudmFile(context, param){
-            console.log(param)
+            debugger;
             switch(param.action){
                 case Action.FILE_ADD:
                     send(param.model).then(() => {
