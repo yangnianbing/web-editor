@@ -1,3 +1,4 @@
+import idGenerator from '../comet/idGenerator'
 function createFile(){
     var $store = this.$store;
     var max = '';
@@ -19,7 +20,7 @@ function createFile(){
     if(!max){
         max = allUntitled.length +1;
     }
-    $store.commit('setCurrentShowFile', {currentShowFile : {name:'Untitled-' + max, path : 'Untitled-' + max, folder : false, content:'', type:'tmp'}});
+    $store.commit('setCurrentShowFile', {currentShowFile : {name:'Untitled-' + max, path : 'Untitled-' + max, folder : false, content:'', type:'tmp', id : idGenerator.next()}});
 }
 
 

@@ -2,7 +2,7 @@ import { MessageBox, Message as Tip } from 'element-ui';
 
 import {Message, Action} from '../comet/Message'
 import Constants from '../util/Constants'
- 
+ console.log(Constants);
 function saveFile(){
     var $store = this.$store;
     var currentSelectFile = $store.state.currentSelectFile;
@@ -21,7 +21,7 @@ function saveFile(){
             var inputValue = instance.inputValue;
             var isRight = false;
             Object.keys($store.state.files).every(key => {
-                if(value.startsWith(key + Constants.fileSeperate)){
+                if(inputValue.startsWith(key + Constants.fileSeperate)){
                     isRight = true;
                     return false
                 }
@@ -36,7 +36,11 @@ function saveFile(){
             }
         }
     }).then(({ value }) => {
-            var message = new Message(Action.FILE_ADD, {model:currentShowFile});
+            var model = Object.assign({}, currentShowFile);
+            model.path = value;
+            delete model.type;
+            model.name = value.substring(value.lastIndexOf(Constants.fileSeperate)+1);
+            var message = new Message(Action.FILE_ADD, model);
             $store.dispatch('crudmFile', message);
         }).catch(e => {
             Tip.warning({

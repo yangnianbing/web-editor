@@ -2,6 +2,9 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {Action} from '../comet/Message'
 import {send} from '../comet/comet'
+import Constants from '../util/Constants'
+import functions from '../util/functions'
+import assign from 'lodash.assign'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -82,8 +85,10 @@ export default new Vuex.Store({
         setCurrentShowFile(state, param){
             state.currentShowFile = param.currentShowFile;
             var areadyOpen = false;
-            state.openFiles.every(function(file){
-                if(file.path == param.currentShowFile.path){
+            state.openFiles.every(function(file, index){
+                if(file.id === param.currentShowFile.id){
+                    state.openFiles[index] = param.currentShowFile;
+                    Vue.set(state.openFiles, state.openFiles);
                     areadyOpen = true;
                     return false;
                 }
@@ -95,7 +100,16 @@ export default new Vuex.Store({
         setCurrentSelectFile(state, param){
             state.currentSelectFile = param.currentSelectFile;
         },
-
+        addFiles(state, param){
+            var savefiles = param.files;
+            savefiles.forEach(file => {
+                var path = file.path;
+                var bread = path.split(Constants.fileSeperate);
+                var moduleName = bread.unshift();
+                var files = state.files[moduleName];
+                assign(state.files, file);
+            })
+        }
     },
     actions : {
         //call action by store.dispatch('increment')
@@ -109,11 +123,11 @@ export default new Vuex.Store({
 
         //增删查改移动文件
         crudmFile(context, param){
-            debugger;
             switch(param.action){
                 case Action.FILE_ADD:
-                    send(param.model).then(() => {
-                        
+                    send(param.content,() => {
+                         context.commit('setCurrentShowFile',  {currentShowFile : param.content})
+                         context.commit('addFiles',  {files : [param.content]})
                     });
                 case Action.FILE_DELETE:
                 case Action.FILE_MODIFY:

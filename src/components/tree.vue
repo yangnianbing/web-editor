@@ -18,6 +18,8 @@
 
 <script>
     import Vue from 'vue'
+    import idGenerator from '../comet/idGenerator'
+
     export default {  
         name: 'item',
         props: {
@@ -34,6 +36,7 @@
                 var $vue = this;
                 $vue.model.isFolder &&  $vue.model.children.forEach(function(child){
                     child.path =  $vue.model.path ? ( $vue.model.path + '/' + child.name) : ( $vue.model.name + '/' + child.name) ;
+                    child.id = idGenerator.next();
                 })
                 return $vue.model;
             }

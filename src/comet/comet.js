@@ -19,9 +19,11 @@ function send(msg, fn){
     if(!window.connection){
         comet({onOpen : function(){
             window.connection.send(JSON.stringify(msg));
+            fn && fn();
         }});
     }else{
          window.connection.send(JSON.stringify(msg));
+         fn && fn();
     }
 }
 
@@ -48,6 +50,7 @@ function comet(params){
         console.log('socket close', e)
     }
     function onMessage(e){
+        console.log(e);
         var keys = Object.keys(handlerPoll);
 
         keys.forEach(key => {
