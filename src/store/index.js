@@ -101,14 +101,16 @@ export default new Vuex.Store({
             state.currentSelectFile = param.currentSelectFile;
         },
         addFiles(state, param){
-            var savefiles = param.files;
-            savefiles.forEach(file => {
-                var path = file.path;
-                var bread = path.split(Constants.fileSeperate);
-                var moduleName = bread.unshift();
-                var files = state.files[moduleName];
-                assign(state.files, file);
-            })
+            return false;
+            // var savefiles = param.files;
+            // savefiles.forEach(file => {
+            //     var path = file.path;
+            //     var tree = state.files[path.split(Constants.fileSeperate).shift()];
+            //     var msg = functions.mergeTreeNode(tree, file);
+            //     if(msg !== true && msg){
+
+            //     }
+            // })
         }
     },
     actions : {
@@ -127,7 +129,7 @@ export default new Vuex.Store({
                 case Action.FILE_ADD:
                     send(param.content,() => {
                          context.commit('setCurrentShowFile',  {currentShowFile : param.content})
-                         context.commit('addFiles',  {files : [param.content]})
+                         context.commit('addFiles',  {files : [param.content]}) 
                     });
                 case Action.FILE_DELETE:
                 case Action.FILE_MODIFY:

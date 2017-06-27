@@ -2,7 +2,6 @@ import { MessageBox, Message as Tip } from 'element-ui';
 
 import {Message, Action} from '../comet/Message'
 import Constants from '../util/Constants'
- console.log(Constants);
 function saveFile(){
     var $store = this.$store;
     var currentSelectFile = $store.state.currentSelectFile;
