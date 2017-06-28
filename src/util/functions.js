@@ -54,5 +54,24 @@ export default {
         }
         recurse(target, breads, file);
         return target;
+    },
+
+    registerLanguageComplete(language, completes){
+        window.monaco && window.monaco.languages.registerCompletionItemProvider(language, {
+            provideCompletionItems : () => {
+                return completes;
+            }
+        })
+    },
+
+    componentToCompleteItem(components){
+        debugger;
+        return window.monaco ? components.map(component => {
+            return {
+                label : component,
+                kind : window.monaco.languages.CompletionItemKind.Keyword,
+                insertText : '<' + component + '></' + component + '>'
+            }
+        }) : components;
     }
 }

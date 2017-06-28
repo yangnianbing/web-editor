@@ -12,7 +12,6 @@ export default new Vuex.Store({
         //get by store.state.x
         //mapState
         $eventBus : new Vue(),
-        x : 1,
         currentShowFile :{},
         currentSelectFile : {},
         openFiles : [],
@@ -72,7 +71,8 @@ export default new Vuex.Store({
             ]
         },{
             name : 'Edit'
-        }]
+        }],
+        components : []
     },
     mutations : {
         //call by store.commit('increment', param);
@@ -101,16 +101,16 @@ export default new Vuex.Store({
             state.currentSelectFile = param.currentSelectFile;
         },
         addFiles(state, param){
-            return false;
-            // var savefiles = param.files;
-            // savefiles.forEach(file => {
-            //     var path = file.path;
-            //     var tree = state.files[path.split(Constants.fileSeperate).shift()];
-            //     var msg = functions.mergeTreeNode(tree, file);
-            //     if(msg !== true && msg){
+            var savefiles = param.files;
+            savefiles.forEach(file => {
+                var path = file.path;
+                var tree = state.files[path.split(Constants.fileSeperate).shift()];
+                functions.mergeTreeNode(tree, file);
+            })
+        },
 
-            //     }
-            // })
+        setComponents(state, param){
+            state.components = param.components;
         }
     },
     actions : {
@@ -129,7 +129,7 @@ export default new Vuex.Store({
                 case Action.FILE_ADD:
                     send(param.content,() => {
                          context.commit('setCurrentShowFile',  {currentShowFile : param.content})
-                         context.commit('addFiles',  {files : [param.content]}) 
+                         context.commit('addFiles',  {files : [param.content]})
                     });
                 case Action.FILE_DELETE:
                 case Action.FILE_MODIFY:
@@ -137,13 +137,16 @@ export default new Vuex.Store({
                 case Action.FILE_MOVE:
                     console.log(param.content);
             }
+        },
+
+        fetchComponents(context){
+            fetch(Constants.serverHost + '/components/list').then(resp =>resp.json()).then(json => {
+                context.commit('setComponents', {components : json});
+            })
         }
     },
     getters : {
         //get by store.getters.x
         //mapGetters
-        x : state => {
-            return state.x;
-        }
     }
 })

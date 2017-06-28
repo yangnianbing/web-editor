@@ -24,6 +24,7 @@
 import MonacoEditor from 'vue-monaco-editor'
 import LanguageUtil from '../util/suffixMapLanguage'
 import {mapState} from 'vuex'
+import functions from '../util/functions'
 
 import {Tabs, TabPane, MessageBox} from 'element-ui'
 
@@ -33,7 +34,18 @@ module.exports = {
     },
     data() {
         return {
+            editors: [],
+            registerComponents : false
         };
+    },
+    mounted(){
+        var $vue = this;
+        this.$store.watch((state) => {
+            return state.components;
+        }, (newValue, oldValue) => {
+            functions.registerLanguageComplete('typescript', functions.componentToCompleteItem(newValue));
+        })
+        this.$store.dispatch('fetchComponents');
     },
     computed : {
         ... mapState({
@@ -54,11 +66,14 @@ module.exports = {
     },
     methods: {
         onMounted(editor) {
-            this.editor = editor;
+            var $vue = this;
+            this.editors.push(editor);
+            if(!this.registerComponents){
+                 functions.registerLanguageComplete('typescript', functions.componentToCompleteItem($vue.$store.state.components));
+            }
         },
         onCodeChange(editor) {
-            this.$store.state.currentShowFile.content = this.editor.getValue();
-            //this.$store.commit('setCurrentShowFile', {currentShowFile :this.$store.state.currentShowFile});
+
         },
         handleTabsEdit(targetName, action){
             var $eventBus = this.$store.state.$eventBus;
@@ -79,15 +94,13 @@ module.exports = {
         handleTabClick(tab, evt){
             var $vue = this;
             var $eventBus = $vue.$store.state.$eventBus;
-            console.log(tab);
             if(isAddButton(evt.target)){
                  $eventBus.$emit('createFile');
             }else{
-                console.log($vue.$store.state.openFiles[tab.index]);
                 $vue.$store.commit('setCurrentShowFile', {currentShowFile:$vue.$store.state.openFiles[tab.index]})
             }
         }
-    },
+    }
 };
 
 function isAddButton(target){
