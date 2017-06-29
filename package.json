@@ -1,7 +1,7 @@
 {
   "name": "vue-git",
   "version": "1.0.0",
-  "description": "使用vue和github api构建的github客户端",
+  "description": "vue web ide",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
