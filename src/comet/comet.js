@@ -15,27 +15,26 @@ function registerSocket(fn){
     return null;
 }
 
-function send(msg, fn){
-    if(!window.connection){
-        comet({onOpen : function(){
+function send(msg, fn) {
+    if (!window.connection) {
+        comet({onOpen: function() {
             window.connection.send(JSON.stringify(msg));
             fn && fn();
         }});
-    }else{
-         window.connection.send(JSON.stringify(msg));
-         fn && fn();
+    } else {
+        window.connection.send(JSON.stringify(msg));
+        fn && fn();
     }
 }
 
-
-function comet(params){
-    if(window.connection){
+function comet(params) {
+    if (window.connection) {
         return;
     }
     var WebSocket = window.WebSocket;
     var connection = window.connection = new WebSocket(serverHost);
 
-    if(connection){
+    if (connection) {
         connection.onopen = onOpen;
         connection.onclose = onClose;
         connection.onmessage = onMessage;

@@ -2,10 +2,10 @@ import Constants from './Constants'
 
 export default {
     //  a/b/c/d => {a:{b:{c:{d:obj}}}};
-    stringToTreeNode(str, file){
+    stringToTreeNode(str, file) {
         // var breads = str.split(Constants.fileSeperate);
         // var key = breads.pop();
- 
+
         // function recurse(breads, content){
         //     var tmp = {};
         //     if(breads.length <= 0){
@@ -23,31 +23,31 @@ export default {
         // return recurse(breads, file)
     },
 
-    mergeTreeNode(target, file){
+    mergeTreeNode(target, file) {
         var breads = file.path.split(Constants.fileSeperate);
         breads.pop();
         breads.shift();
 
-        function recurse(tree, breads, file){
-            if(breads.length == 0){
+        function recurse(tree, breads, file) {
+            if (breads.length === 0) {
                 tree.children.push(file);
                 return;
             }
-            var path = breads.shift()
+            var path = breads.shift();
             var subTree;
-            tree.children.every(function(item){
-                if(item.name == path){
+            tree.children.every(function(item) {
+                if (item.name === path) {
                     subTree = item;
                     return false;
                 }
                 return true;
-            })
-            if(!subTree){
+            });
+            if (!subTree) {
                 subTree = {
-                    name : path,
-                    isFolder : true,
-                    children : []
-                }
+                    name: path,
+                    isFolder: true,
+                    children: []
+                };
                 tree.children.push(subTree);
             }
             recurse(subTree, breads, file);
@@ -56,22 +56,21 @@ export default {
         return target;
     },
 
-    registerLanguageComplete(language, completes){
+    registerLanguageComplete(language, completes) {
         window.monaco && window.monaco.languages.registerCompletionItemProvider(language, {
-            provideCompletionItems : () => {
+            provideCompletionItems: () => {
                 return completes;
             }
-        })
+        });
     },
 
-    componentToCompleteItem(components){
-        debugger;
+    componentToCompleteItem(components) {
         return window.monaco ? components.map(component => {
             return {
-                label : component,
-                kind : window.monaco.languages.CompletionItemKind.Keyword,
-                insertText : '<' + component + '></' + component + '>'
-            }
+                label: component,
+                kind: window.monaco.languages.CompletionItemKind.Keyword,
+                insertText: '<' + component + '></' + component + '>'
+            };
         }) : components;
     }
-}
+};

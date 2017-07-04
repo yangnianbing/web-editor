@@ -72,65 +72,66 @@ export default new Vuex.Store({
         },{
             name : 'Edit'
         }],
-        components : []
+        components: []
     },
-    mutations : {
-        //call by store.commit('increment', param);
-        //or call by store.commit({
+    mutations: {
+        // call by store.commit('increment', param);
+        // or call by store.commit({
         //      type:'increment',
         //      ...
-        //})
-        //mutations must be synchronous
-        //map to component mapMutations
+        // })
+        // mutations must be synchronous
+        // map to component mapMutations
         setCurrentShowFile(state, param){
             state.currentShowFile = param.currentShowFile;
             var areadyOpen = false;
-            state.openFiles.every(function(file, index){
-                if(file.id === param.currentShowFile.id){
+            state.openFiles.every(function(file, index) {
+                if (file.id === param.currentShowFile.id) {
                     state.openFiles[index] = param.currentShowFile;
                     Vue.set(state.openFiles, state.openFiles);
                     areadyOpen = true;
                     return false;
                 }
                 return true;
-            })
+            });
             !areadyOpen && state.openFiles.push(param.currentShowFile);
         },
 
         setCurrentSelectFile(state, param){
             state.currentSelectFile = param.currentSelectFile;
         },
-        addFiles(state, param){
+        addFiles(state, param) {
             var savefiles = param.files;
             savefiles.forEach(file => {
                 var path = file.path;
                 var tree = state.files[path.split(Constants.fileSeperate).shift()];
                 functions.mergeTreeNode(tree, file);
-            })
+            });
         },
 
         setComponents(state, param){
             state.components = param.components;
         }
     },
-    actions : {
-        //call action by store.dispatch('increment')
-        //like actions but some different
+    actions: {
+        // call action by store.dispatch('increment')
+        // like actions but some different
         // commit by mutation
-        //it is asynchronous
-        incrment(context){
-            //can do some async operations
-            context.commit('increment')
+        // it is asynchronous
+        incrment(context) {
+            // can do some async operations
+            context.commit('increment');
         },
 
-        //增删查改移动文件
-        crudmFile(context, param){
-            switch(param.action){
+        // 增删查改移动文件
+        crudmFile(context, param) {
+            switch (param.action) {
                 case Action.FILE_ADD:
-                    send(param.content,() => {
-                         context.commit('setCurrentShowFile',  {currentShowFile : param.content})
-                         context.commit('addFiles',  {files : [param.content]})
+                    send(param.content, () => {
+                        context.commit('setCurrentShowFile',  {currentShowFile: param.content});
+                        context.commit('addFiles',  {files: [param.content]});
                     });
+                    break;
                 case Action.FILE_DELETE:
                 case Action.FILE_MODIFY:
                 case Action.FILE_RENAME:
