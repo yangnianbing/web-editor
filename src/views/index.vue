@@ -1,42 +1,44 @@
 <template>
-    <div class="ide">
-        <TopBar></TopBar>
-        <ToolBar></ToolBar>
-        <Ide></Ide>
-        <ToolSlide></ToolSlide>
-    </div>
+  <div class="ide">
+  <TopBar></TopBar>
+  <ToolBar></ToolBar>
+  <Ide></Ide>
+  <ToolSlide></ToolSlide>
+  <layout></layout>
+  </div>
 </template>
 
 <script>
-        import TopBar from '../components/topBar'
-        import ToolBar from '../components/toolBar'
-        import Ide from '../components/ide'
-        import ToolSlide from '../components/toolSlide'
-        import '../assets/css/index.css'
-        import 'element-ui/lib/theme-default/index.css'
+  import TopBar from '../components/topBar'
+  import ToolBar from '../components/toolBar'
+  import Ide from '../components/ide'
+  import ToolSlide from '../components/toolSlide'
+  import '../assets/css/index.css'
+  import 'element-ui/lib/theme-default/index.css'
+  import layout from '../components/layout'
 
-        export default{
-            name : 'app',
-            components : {TopBar, ToolBar, Ide, ToolSlide},
+  export default{
+    name: 'app',
+    components: {TopBar, ToolBar, Ide, ToolSlide, layout},
 
-            created(){
-                var $eventBus = this.$store.state.$eventBus;
-                var $vue = this;
-                 window.addEventListener('keydown', e => {
-                    if( e.ctrlKey  == true && e.keyCode == 83 ){
-                        if($vue.$store.state.currentShowFile.type == 'tmp'){
-                            $eventBus.$emit('saveFile');
-                        }
-                        e.preventDefault();
-                    }
-                })
-            }
+    created () {
+      var $eventBus = this.$store.state.$eventBus
+      var $vue = this
+      window.addEventListener('keydown', e => {
+        if (e.ctrlKey === true && e.keyCode === 83) {
+          if ($vue.$store.state.currentShowFile.type === 'tmp') {
+            $eventBus.$emit('saveFile')
+          }
+          e.preventDefault()
         }
+      })
+    }
+  }
 </script>
 
 <style lang="css">
-    .ide{
-        height: 100%;
-    }
-    
+  .ide{
+    height: 100%
+  }
+  
 </style>

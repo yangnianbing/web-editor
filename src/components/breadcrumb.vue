@@ -2,41 +2,37 @@
     <div class="breadcrumb">
         <ul>
             <li @click="changeCurrentOpenFile(index)" v-for="(path, index) in paths">
-                <i  v-if="index != paths.length-1 || paths.length == 1" class="icon-close iconfont"></i>
+                <i v-if="index != paths.length-1 || paths.length == 1" class="icon-close iconfont"></i>
                 <i v-if="index == paths.length-1 && paths.length != 1" class="icon-form iconfont"></i>
                 <span>{{path}}</span>
-                
-                <i  v-if="index != paths.length-1"  class="icon-more iconfont"></i>
+
+                <i v-if="index != paths.length-1" class="icon-more iconfont"></i>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-     import idGenerator from '../comet/idGenerator'
-
-    export default{
-
-        computed : {
-            paths(){
-                return this.$store.state.currentShowFile.path ? this.$store.state.currentShowFile.path.split('/'):'';
-            }
-        },
-        methods:{
-            changeCurrentOpenFile(index){
-                
-            }
-        }
+export default {
+  computed: {
+    paths () {
+      return this.$store.state.currentShowFile.path ? this.$store.state.currentShowFile.path.split('/') : ''
     }
+  },
+  methods: {
+    changeCurrentOpenFile (index) {
+    }
+  }
+}
 </script>
 
 <style lang="css">
-    div.breadcrumb ul{
-        margin:0px;
-        padding:0px;
-    }
+div.breadcrumb ul {
+  margin: 0px;
+  padding: 0px;
+}
 
-    .breadcrumb ul li{
-        display: inline;
-    }
+.breadcrumb ul li {
+  display: inline;
+}
 </style>
