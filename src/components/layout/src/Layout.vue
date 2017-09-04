@@ -1,6 +1,6 @@
 <template>
-  <div class="vue-jquery-layout">
-
+  <div class="vue-jquery-layout" style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;">
+    <slot></slot>
   </div>
 </template>
 
@@ -16,10 +16,11 @@ export default {
     this.fetchJqueryLayout()
   },
   methods: {
+    initLayout () {
+      $(this.$el).layout()
+    },
     fetchJqueryLayout () {
-      loader.load(this.srcPath, function () {
-        console.log($.layout)
-      })
+      loader.load(this.srcPath, this.initLayout)
     }
   }
 }

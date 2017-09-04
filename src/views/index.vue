@@ -1,25 +1,21 @@
 <template>
-  <div class="ide">
-  <TopBar></TopBar>
-  <ToolBar></ToolBar>
-  <Ide></Ide>
-  <ToolSlide></ToolSlide>
-  <layout></layout>
-  </div>
+  <Layout>
+    <div class="ui-layout-center"></div>
+    <div class="ui-layout-north"></div>
+    <div class="ui-layout-south"></div>
+    <div class="ui-layout-east"></div>
+    <div class="ui-layout-west"></div>
+  </Layout>
 </template>
 
 <script>
-  import TopBar from '../components/topBar'
-  import ToolBar from '../components/toolBar'
-  import Ide from '../components/ide'
-  import ToolSlide from '../components/toolSlide'
   import '../assets/css/index.css'
   import 'element-ui/lib/theme-default/index.css'
-  import layout from '../components/layout'
+  import Layout from '../components/layout'
 
   export default{
     name: 'app',
-    components: {TopBar, ToolBar, Ide, ToolSlide, layout},
+    components: {Layout},
 
     created () {
       var $eventBus = this.$store.state.$eventBus
