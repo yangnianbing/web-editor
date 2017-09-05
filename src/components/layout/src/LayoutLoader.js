@@ -1,8 +1,6 @@
-import $ from 'jquery'
-
 export default {
   load (srcPath = 'http://layout.jquery-dev.com/lib/js/jquery.layout-latest.js', callback) {
-    if ($.layout) {
+    if (window.$.layout) {
       callback()
       return
     }

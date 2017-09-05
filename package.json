@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "jquery": "2.2.4",
-    "jquery-ui": "^1.12.1",
     "lodash.assign": "^4.2.0",
     "vue": "^2.3.3",
     "vue-grid-layout": "^2.1.9",

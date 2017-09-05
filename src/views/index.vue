@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout srcPath="/static/jquery/jquery-layout.js">
     <div class="ui-layout-center"></div>
     <div class="ui-layout-north"></div>
     <div class="ui-layout-south"></div>
