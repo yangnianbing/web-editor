@@ -2,7 +2,7 @@
   <Layout srcPath="/static/jquery/jquery-layout.js">
     <div class="ui-layout-center"></div>
     <div class="ui-layout-north"></div>
-    <div class="ui-layout-south"></div>
+    <div class="ui-layout-south"><FileTree url="http://www.baidu.com"></FileTree></div>
     <div class="ui-layout-east"></div>
     <div class="ui-layout-west"></div>
   </Layout>
@@ -12,10 +12,11 @@
   import '../assets/css/index.css'
   import 'element-ui/lib/theme-default/index.css'
   import Layout from '../components/layout'
+  import FileTree from '../components/FileTree'
 
   export default{
     name: 'app',
-    components: {Layout},
+    components: {Layout, FileTree},
 
     created () {
       var $eventBus = this.$store.state.$eventBus
