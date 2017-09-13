@@ -1,6 +1,7 @@
 # vue-github-web-editor
 
-> a on-line web editor for github
+> 本来想使用github的api写一个github的web编辑器，但是突然发现github的api里面并没有提供修改文件的api，那么肿么办，先写着吧，就当熟悉熟悉vue
+
 
 ## Build Setup
 
