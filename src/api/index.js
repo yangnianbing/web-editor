@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-const baseUrl = 'https://api.github.com';
+const instance = axios.create({
+  baseUrl: 'https://api.github.com'
+})
 
-export default function api(method, url, param, success, fail){
-  
+export default function api (method, url, param, success, fail) {
+  instance[method](url, param).then(resp => {
+    success(resp);
+  }).catch(error => {
+    fail(error);
+  })
 }
