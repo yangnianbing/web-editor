@@ -1,24 +1,25 @@
 <template>
   <div class="ide">
-    <Layout srcPath="/static/jquery/jquery-layout.js">
+    
       <div class="ui-layout-center"></div>
-      <div class="ui-layout-north"></div>
+      <div class="ui-layout-north"><IdeMenu></IdeMenu></div>
       <div class="ui-layout-south"></div>
       <div class="ui-layout-east"></div>
       <div class="ui-layout-west"><FileTree url="https://api.github.com/repos/yangnianbing/vue-web-ide/git/trees/master?recursive=1"></FileTree></div>
-    </Layout>
+    
   </div>
 </template>
 
 <script>
   import '../assets/css/index.css'
-  import 'element-ui/lib/theme-default/index.css'
+  import 'element-ui/lib/theme-chalk/index.css'
   import Layout from '../components/layout'
   import FileTree from '../components/FileTree'
+  import IdeMenu from '../components/IdeMenu'
 
   export default{
     name: 'app',
-    components: {Layout, FileTree},
+    components: {Layout, FileTree, IdeMenu},
 
     created () {
       var $eventBus = this.$store.state.$eventBus
@@ -36,8 +37,13 @@
 </script>
 
 <style>
-  .ide .ui-layout-pane{
-    padding: 0px;
+  .ide{
+    height: 100%;
   }
-  
+  .ui-layout-west{
+    width: 20%;
+    position: absolute;
+    top: 61px;
+    bottom: 0px;
+  }
 </style>

@@ -99,9 +99,4 @@ export default {
   .file-tree .el-tree{
     border : 0px;
   }
-
-  .file-tree{
-    height: 100%;
-    overflow: scroll;
-  }
 </style>
