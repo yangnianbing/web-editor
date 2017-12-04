@@ -5,7 +5,7 @@
       <div class="ui-layout-north"><IdeMenu></IdeMenu></div>
       <div class="ui-layout-south"></div>
       <div class="ui-layout-east"></div>
-      <div class="ui-layout-west"><FileTree url="https://api.github.com/repos/yangnianbing/vue-web-ide/git/trees/master?recursive=1"></FileTree></div>
+      <div class="ui-layout-west"><FileTree :localData="mockData" url="https://api.github.com/repos/yangnianbing/vue-web-ide/git/trees/master?recursive=1"></FileTree></div>
     
   </div>
 </template>
@@ -16,11 +16,16 @@
   import Layout from '../components/layout'
   import FileTree from '../components/FileTree'
   import IdeMenu from '../components/IdeMenu'
+  import mockData from './mock'
 
   export default{
     name: 'app',
     components: {Layout, FileTree, IdeMenu},
-
+    data () {
+      return {
+        mockData: mockData
+      }
+    },
     created () {
       var $eventBus = this.$store.state.$eventBus
       var $vue = this

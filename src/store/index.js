@@ -6,11 +6,12 @@ import Constants from '../util/Constants'
 import functions from '../util/functions'
 
 Vue.use(Vuex)
+const $eventBus = new Vue();
 export default new Vuex.Store({
   state: {
   // get by store.state.x
   // mapState
-    $eventBus: new Vue(),
+    $eventBus: $eventBus,
     currentShowFile: {},
     currentSelectFile: {},
     openFiles: [],
@@ -148,3 +149,7 @@ export default new Vuex.Store({
   // mapGetters
   }
 })
+
+import FileAdd from '../plugin/file-add';
+console.log(FileAdd);
+console.log(new FileAdd().apply($eventBus));

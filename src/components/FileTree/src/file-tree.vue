@@ -27,7 +27,7 @@ export default {
   mounted () {
     var $vue = this;
     if ($vue.localData) {
-      $vue.data = this.localData;
+      $vue.data = toTree(this.localData.tree);
     } else if ($vue.url) {
       api('get', $vue.url, {}, (resp) => {
         var data = resp.data;

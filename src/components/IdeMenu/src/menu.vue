@@ -44,7 +44,9 @@ export default {
     }
   },
   beforeCreate () {
-    this.state.$eventBus.$emit('beforeCreate_menu')
+    this.$store.state.$eventBus.$emit('beforeCreate_menu', function () {
+      console.log(1111);
+    })
   },
   created () {
     console.log('created');
