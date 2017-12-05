@@ -3,12 +3,12 @@
     <el-menu mode="horizontal">
       <template v-for="(menu, index) in menus">
         <template v-if="!menu.children">
-          <el-menu-item index="index">{{menu.title}}</el-menu-item>    
+          <el-menu-item index="index" @click="menuclick(menu.act)">{{menu.title}}</el-menu-item>    
         </template>
         <template v-if="menu.children">
           <el-sub-menu index="2">
             <template slot="title">{{menu.title}}</template>
-            <el-menu-item index="2-1" v-for="child in menu.children">{{child.title}}</el-menu-item>
+            <el-menu-item index="2-1" v-for="child in menu.children" @click="menuclick(child.act)">{{child.title}}</el-menu-item>
           </el-sub-menu>    
         </template>
       </template>
@@ -28,34 +28,34 @@ export default {
   },
   data () {
     return {
-      menus: [{
-        title: '菜单1'
-      }, {
-        title: '菜单2',
-        children: [{
-          title: '菜单2-1'
-        }, {
-          title: '菜单2-3'
-        }, {
-          title: '菜单2-4'
-        }]
-      }],
+      menus: [{title: '文件', act: 'file'}],
       activeIndex: '1'
     }
   },
   beforeCreate () {
-    this.$store.state.$eventBus.$emit('beforeCreate_menu', function () {
-      console.log(1111);
-    })
+    this.$store.state.$eventBus.$emit('beforeCreate_menu', function () {}, {
+      menu: this
+    });
   },
   created () {
-    console.log('created');
+    var $vue = this;
+    $vue.$store.state.$eventBus.$emit('created_menu', function (menus) {
+      $vue.menus = menus;
+    }, {
+      menus: $vue.menus
+    })
+  },
+  methods: {
+    menuclick (act) {
+      var $vue = this;
+      this.$store.state.$eventBus.$emit(act, function () { }, {menu: $vue})
+    }
   },
   beforeMount () {
-    console.log('before mount')
+    this.$store.state.$eventBus.$emit('beforeMount_menu', function () { })
   },
   mounted () {
-    console.log('mounted')
+    this.$store.state.$eventBus.$emit('mounted_menu', function () {})
   },
   beforeDestory () {
     console.log('beforeDestory')

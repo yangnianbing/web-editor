@@ -5,7 +5,7 @@
       <div class="ui-layout-north"><IdeMenu></IdeMenu></div>
       <div class="ui-layout-south"></div>
       <div class="ui-layout-east"></div>
-      <div class="ui-layout-west"><FileTree :localData="mockData" url="https://api.github.com/repos/yangnianbing/vue-web-ide/git/trees/master?recursive=1"></FileTree></div>
+      <div class="ui-layout-west"><FileTree :localData="mockData" :url="url"></FileTree></div>
     
   </div>
 </template>
@@ -23,7 +23,8 @@
     components: {Layout, FileTree, IdeMenu},
     data () {
       return {
-        mockData: mockData
+        mockData: mockData,
+        url: 'https://api.github.com/repos/yangnianbing/vue-web-ide/git/trees/master?recursive=1'
       }
     },
     created () {
