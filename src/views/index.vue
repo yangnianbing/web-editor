@@ -1,11 +1,11 @@
 <template>
   <div class="ide">
     <Layout>
-      <div class="ui-layout-center"><Editor></Editor></div>
-      <div class="ui-layout-north"><IdeMenu></IdeMenu></div>
-      <div class="ui-layout-south"></div>
-      <div class="ui-layout-east"></div>
-      <div class="ui-layout-west"><FileTree :localData="mockData" :url="url"></FileTree></div>
+      <div class="ui-panel ui-layout-center"><Editor></Editor></div>
+      <div class="ui-panel ui-layout-south"></div>
+      <div class="ui-panel ui-layout-east"></div>
+      <div class="ui-panel ui-layout-west"><FileTree :localData="mockData" :url="url"></FileTree></div>
+      <div class="ui-panel ui-layout-north"><IdeMenu></IdeMenu></div>
     </Layout>
   </div>
 </template>
@@ -48,16 +48,12 @@
   .ide{
     height: 100%;
   }
-  .ui-layout-west{
-    width: 20%;
-    position: absolute;
-    top: 61px;
-    bottom: 0px;
+  .ui-layout-north.ui-layout-pane{
+    overflow: visible;
   }
 
-  .ui-layout-center{    
-    position: absolute;
-    left: 20%;
-    right: 20%;
+  .ui-panel.ui-layout-pane{
+    padding: 0px
   }
+
 </style>

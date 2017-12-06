@@ -30,30 +30,5 @@ export default{
 </script>
 
 <style lang="css">
-  .ide-right-content{
-    width: 80%;
-    height: 100%;
-    right: 0px;
-  }
-
-  .ide-right-content .el-tabs{
-    height: 100%;
-  }
-
-  .ide-right-content .el-tabs .el-tab-pane{
-    height: 100%;
-  }
-
-   .ide-right-content .el-tabs .el-tabs__content{
-    height: calc(100% - 42px);
-   }
-
-   .ide-right-content .el-tabs .el-tabs__header{
-    margin-bottom: 1px;
-   }
-
-   .ide-right-content .el-tabs .el-tabs__header .el-tabs__nav:last-child {
-    margin-bottom: 1px;
-   }
 
 </style>

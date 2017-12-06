@@ -67,5 +67,20 @@ export default {
 </script>
 
 <style>
+  .menu{
+    height: 28px;
+  }
 
+  .menu .el-menu--horizontal .el-submenu .el-submenu__title{
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .menu .el-menu--horizontal .el-submenu>.el-menu{
+    top: 35px;
+  }
+
+  .menu .el-menu--horizontal{
+    border-bottom: 0px;
+  }
 </style>

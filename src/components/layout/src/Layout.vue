@@ -34,33 +34,9 @@ export default {
         resizable: true,
         slidable:	true,
         livePaneResizing: true,
-        north: {
-          size: 30,
-          slidable: false,
-          resizeable: false,
-          minSize: false
-        },
-        south: {
-          size: 100
-        },
-        west: {
-          minSize: 100,
-          animatePaneSizing: false,
-          fxSpeed_size: 'fast',
-          fxSpeed_open: 1000,
-          fxSettings_open: {
-            easing: 'easeOutBounce'
-          },
-          fxName_close: 'none',
-          showOverflowOnHover: true
-        },
-        east: {
-          size: 200,
-          maxSize: .5
-        },
-        center: {
-          minWidth: 100
-        },
+        spacing_open: 2,
+        togglerLength_open: 2,
+        north__resizable: false,
         //stateManagement__enabled:	true, // automatic cookie load & save enabled by default
         showDebugMessages: true // log and/or display messages from debugging & testing code
       })
