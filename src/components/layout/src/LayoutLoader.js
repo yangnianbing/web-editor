@@ -5,9 +5,10 @@ export default {
       return
     }
 
-    window.LOADER_CALLBACKS = window.LOADER_CALLBACKS || []
-    window.LOADER_CALLBACKS.push(callback)
-    if (window.LOADER_PENDING) {
+    !window.layout && (window.layout = {});
+    window.layout.LOADER_CALLBACKS = window.layout.LOADER_CALLBACKS || []
+    window.layout.LOADER_CALLBACKS.push(callback)
+    if (window.layout.LOADER_PENDING) {
       return
     } else {
       const $script = window.document.createElement('script')
@@ -17,8 +18,8 @@ export default {
       $script.addEventListener('load', () => {
         index++
         if (index === 2) {
-          window.LOADER_PENDING = false
-          window.LOADER_CALLBACKS.forEach(callback => {
+          window.layout.LOADER_PENDING = false
+          window.layout.LOADER_CALLBACKS.forEach(callback => {
             callback()
           })
         }
@@ -31,15 +32,15 @@ export default {
       $style.addEventListener('load', () => {
         index++
         if (index === 2) {
-          window.LOADER_PENDING = false
-          window.LOADER_CALLBACKS.forEach(callback => {
+          window.layout.LOADER_PENDING = false
+          window.layout.LOADER_CALLBACKS.forEach(callback => {
             callback()
           })
         }
       })
       window.document.body.appendChild($script)
       window.document.body.appendChild($style)
-      window.LOADER_PENDING = true
+      window.layout.LOADER_PENDING = true
     }
   }
 }

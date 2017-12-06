@@ -1,6 +1,6 @@
 <template>
   <div class="file-tree">
-    <Tree :data="data" @node-expand="nodeExpand"></Tree>
+    <Tree :data="data" @node-click="nodeClick"></Tree>
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import {Tree} from 'element-ui';
 import constants from '../../../constants/constants'
 import _ from 'lodash'
 import api from '../../../api'
+import Vue from 'vue'
 
 export default {
   name: 'FileTree',
@@ -30,10 +31,10 @@ export default {
       if (typeof data === 'object') {
         $vue.data = toTree(this.localData.tree);
       } else if (typeof data === 'string') {
-        api('get', $vue.url, {}, (resp) => {
+        api('get', data, {}, (resp) => {
           var data = resp.data;
           var tree = data.tree;
-          $vue.data = toTree(tree);
+          Vue.set($vue, 'data', toTree(tree))
         }, (error) => {
           console.log(error, 11111)
         })
@@ -85,11 +86,20 @@ export default {
       fileHaveNotLoadArray.forEach(fileHaveNotLoad => {
         api('get', fileHaveNotLoad.url, {}, resp => {
           var data = resp.data;
+          console.log(data.content);
           fileHaveNotLoad.content = atob(data.content);
         }, error => {
           console.log(error);
         })
       })
+    },
+    nodeClick (data, node, $el) {
+      if (data.type === 'blob' && !data.content) {
+        api('get', data.url, {}, resp => {
+          var content = atob(resp.data);
+          console.log(content);
+        })
+      }
     }
   },
   mounted () {
@@ -97,7 +107,6 @@ export default {
     $vue.refresh($vue.localData ? $vue.localData : $vue.url);
 
     this.$store.state.$eventBus.$on('open-url', (callback, param) => {
-      console.log(param);
       $vue.refresh(param.url)
     });
   }
