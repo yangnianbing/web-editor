@@ -1,6 +1,6 @@
 <template>
   <div class="editor">
-    <Tabs type="card"  addable>
+    <Tabs type="card" v-model="currentShowFileIndex" addable>
       <TabPane v-for="(file,index) in openFiles" :key="'' + index" closable  :label="file.name" :name="'' + index">
         <MonacoEditor
           height="100%"
@@ -16,8 +16,9 @@
 
 <script>
 import MonacoEditor from 'vue-monaco-editor'
-
+import Vue from 'vue'
 import {Tabs, TabPane} from 'element-ui'
+import {mapMutations} from 'vuex'
 
 export default{
   components: {
@@ -27,13 +28,23 @@ export default{
     var $vue = this;
 
     $vue.$store.state.$eventBus.$on('file-open', (callback, params) => {
-      
+      $vue.setFile(params);
+      Vue.set($vue.openFiles, $vue.openFiles.length, params)
+      $vue.length = $vue.openFiles.length;
     })
+  },
+  methods: {
+    ...mapMutations(['setFile'])
+  },
+  computed: {
+    currentShowFileIndex: function () {
+      return this.length - 1;
+    }
   },
   data () {
     return {
-      currentShowFileIndex: 0,
       editors: [],
+      length: 1,
       openFiles: [{name: 'test'}]
     }
   }

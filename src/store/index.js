@@ -20,6 +20,11 @@ export default new Vuex.Store({
     setFile (state, file) {
       // TODO update filesMap
       state.filesMap[file.path] = file;
+      // state.files.forEach((item, index) => {
+      //   if (item.path === file.path) {
+      //     Vue.set(state.files, index, file);
+      //   }
+      // })
     }
   },
   actions: {},

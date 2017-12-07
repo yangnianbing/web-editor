@@ -55,7 +55,7 @@ export default {
           var content = atob(resp.data.content);
           $vue.$store.state.$eventBus.$emit('file-open', function () {
 
-          }, {url: data.path, content: content});
+          }, {path: data.path, content: content});
         })
       }
     },
