@@ -18,7 +18,6 @@
 import MonacoEditor from 'vue-monaco-editor'
 
 import {Tabs, TabPane} from 'element-ui'
-import {mapMutations} from 'vuex'
 
 export default{
   components: {
@@ -28,11 +27,8 @@ export default{
     var $vue = this;
 
     $vue.$store.state.$eventBus.$on('file-open', (callback, params) => {
-      $vue.setFile(params);
+      
     })
-  },
-  methods: {
-    ...mapMutations(['setFile'])
   },
   data () {
     return {
