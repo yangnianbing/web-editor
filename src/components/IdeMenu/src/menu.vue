@@ -3,12 +3,12 @@
     <el-menu mode="horizontal">
       <template v-for="(menu, index) in menus">
         <template v-if="!menu.children">
-          <el-menu-item index="index" @click="menuclick(menu.act)">{{menu.title}}</el-menu-item>    
+          <el-menu-item index="index" @click="menuclick(menu.act)" :key="menu.act">{{menu.title}}</el-menu-item>    
         </template>
         <template v-if="menu.children">
           <el-sub-menu index="2">
             <template slot="title">{{menu.title}}</template>
-            <el-menu-item index="2-1" v-for="child in menu.children" @click="menuclick(child.act)">{{child.title}}</el-menu-item>
+            <el-menu-item index="2-1" v-for="child in menu.children" @click="menuclick(child.act)" :key="child.act">{{child.title}}</el-menu-item>
           </el-sub-menu>    
         </template>
       </template>

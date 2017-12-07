@@ -1,6 +1,6 @@
 <template>
   <div class="file-tree">
-    <Tree :data="data" @node-click="nodeClick"></Tree>
+    <Tree :data="treefiles" @node-click="nodeClick"></Tree>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import {Tree} from 'element-ui';
 import constants from '../../../constants/constants'
 import _ from 'lodash'
 import api from '../../../api'
-import Vue from 'vue'
+import {mapMutations} from 'vuex'
 
 export default {
   name: 'FileTree',
@@ -20,26 +20,50 @@ export default {
   components: {
     Tree
   },
-  data () {
-    return {
-      data: []
-    }
-  },
   methods: {
     refresh (data) {
       var $vue = this;
       if (typeof data === 'object') {
-        $vue.data = toTree(this.localData.tree);
+        $vue.setFiles(this.localData.tree)
       } else if (typeof data === 'string') {
         api('get', data, {}, (resp) => {
           var data = resp.data;
           var tree = data.tree;
-          Vue.set($vue, 'data', toTree(tree))
+          $vue.setFiles(tree)
         }, (error) => {
           console.log(error, 11111)
         })
       }
+    },
+    nodeExpand (data, node, $el) {
+      var children = data.children;
+      var fileHaveNotLoadArray = _.filter(children, (node) => node.type === 'blob' && !node.content);
+      fileHaveNotLoadArray.forEach(fileHaveNotLoad => {
+        api('get', fileHaveNotLoad.url, {}, resp => {
+          var data = resp.data;
+          console.log(data.content);
+          fileHaveNotLoad.content = atob(data.content);
+        }, error => {
+          console.log(error);
+        })
+      })
+    },
+    nodeClick (data, node, $el) {
+      var $vue = this;
+      if (data.type === 'blob' && !data.content) {
+        api('get', data.url, {}, resp => {
+          var content = atob(resp.data.content);
+          $vue.$store.state.$eventBus.$emit('file-open', function () {
 
+          }, {url: data.path, content: content});
+        })
+      }
+    },
+    ...mapMutations(['setFiles'])
+  },
+  computed: {
+    treefiles () {
+      return toTree(this.$store.state.files)
       function toTree (subNodes) {
         var treeNodes = {};
         var rootNodes = [];
@@ -78,27 +102,6 @@ export default {
           return arg1.label > arg2.label ? 1 : -1;
         })
         return dirs.concat(files);
-      }
-    },
-    nodeExpand (data, node, $el) {
-      var children = data.children;
-      var fileHaveNotLoadArray = _.filter(children, (node) => node.type === 'blob' && !node.content);
-      fileHaveNotLoadArray.forEach(fileHaveNotLoad => {
-        api('get', fileHaveNotLoad.url, {}, resp => {
-          var data = resp.data;
-          console.log(data.content);
-          fileHaveNotLoad.content = atob(data.content);
-        }, error => {
-          console.log(error);
-        })
-      })
-    },
-    nodeClick (data, node, $el) {
-      if (data.type === 'blob' && !data.content) {
-        api('get', data.url, {}, resp => {
-          var content = atob(resp.data);
-          console.log(content);
-        })
       }
     }
   },
