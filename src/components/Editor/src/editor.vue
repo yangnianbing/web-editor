@@ -1,12 +1,14 @@
 <template>
   <div class="editor">
-    <Tabs type="card" v-model="currentShowFileIndex" addable>
+    <Tabs type="card" v-model="currentIndex" addable>
       <TabPane v-for="(file,index) in openFiles" :key="'' + index" closable  :label="file.name" :name="'' + index">
         <MonacoEditor
           height="100%"
           language="typescript"
           srcPath="/static/monaco-editor/dev"
           :changeThrottle="1000"
+          :code="file.content"
+          @mounted="onMounted"
           theme="vs-light"
           ></MonacoEditor>
       </TabPane>
@@ -19,6 +21,7 @@ import MonacoEditor from 'vue-monaco-editor'
 import Vue from 'vue'
 import {Tabs, TabPane} from 'element-ui'
 import {mapMutations} from 'vuex'
+import _ from 'lodash'
 
 export default{
   components: {
@@ -29,23 +32,38 @@ export default{
 
     $vue.$store.state.$eventBus.$on('file-open', (callback, params) => {
       $vue.setFile(params);
-      Vue.set($vue.openFiles, $vue.openFiles.length, params)
-      $vue.length = $vue.openFiles.length;
+      $vue.currentFile = params;
+      var currentFile = _.find($vue.openFiles, (file) => {
+        return file.path === $vue.currentFile.path;
+      });
+      if (currentFile) {
+        $vue.currentFile = currentFile;
+      } else {
+        $vue.currentFile = params;
+        Vue.set($vue.openFiles, $vue.openFiles.length, params)
+      }
     })
   },
   methods: {
-    ...mapMutations(['setFile'])
+    ...mapMutations(['setFile']),
+    onMounted (editor) {
+      
+    }
   },
   computed: {
-    currentShowFileIndex: function () {
-      return this.length - 1;
+    currentIndex () {
+      var $vue = this;
+      // 晕死，必须返回字符串，才能正确切换
+      return (_.findIndex($vue.openFiles, (file) => {
+        return file.path === $vue.currentFile.path;
+      })).toString()
     }
   },
   data () {
     return {
       editors: [],
-      length: 1,
-      openFiles: [{name: 'test'}]
+      currentFile: Object,
+      openFiles: []
     }
   }
 }

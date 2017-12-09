@@ -8,6 +8,7 @@ export default function api (method, url, param, success, fail) {
   instance[method](url, param).then(resp => {
     success(resp);
   }).catch(error => {
-    fail(error);
+    success(error);
+    // fail(error);
   })
 }

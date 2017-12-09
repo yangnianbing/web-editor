@@ -10,21 +10,13 @@ export default new Vuex.Store({
   // mapState
     $eventBus: $eventBus,
     files: [],
-    filesMap: {}
   },
   mutations: {
     setFiles (state, files) {
-      state.files = files;
-      state.filesMap = _.keyBy(files, 'path');
+      state.files = _.keyBy(files, 'path');
     },
     setFile (state, file) {
-      // TODO update filesMap
-      state.filesMap[file.path] = file;
-      // state.files.forEach((item, index) => {
-      //   if (item.path === file.path) {
-      //     Vue.set(state.files, index, file);
-      //   }
-      // })
+      state.files[file.path] = file;
     }
   },
   actions: {},

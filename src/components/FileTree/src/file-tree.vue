@@ -41,8 +41,7 @@ export default {
       fileHaveNotLoadArray.forEach(fileHaveNotLoad => {
         api('get', fileHaveNotLoad.url, {}, resp => {
           var data = resp.data;
-          console.log(data.content);
-          fileHaveNotLoad.content = atob(data.content);
+          fileHaveNotLoad.content = data.content ? atob(data.content) : '';
         }, error => {
           console.log(error);
         })
@@ -52,22 +51,28 @@ export default {
       var $vue = this;
       if (data.type === 'blob' && !data.content) {
         api('get', data.url, {}, resp => {
-          var content = atob(resp.data.content);
+          var content = (resp.data && resp.data.content) ? atob(resp.data.content) : '';
+          data.content = content;
           $vue.$store.state.$eventBus.$emit('file-open', function () {
 
-          }, {path: data.path, content: content});
+          }, data);
         })
+      } else {
+        $vue.$store.state.$eventBus.$emit('file-open', function () {
+
+        }, data);
       }
     },
     ...mapMutations(['setFiles'])
   },
   computed: {
     treefiles () {
-      return toTree(this.$store.state.files)
+      return toTree(_.values(this.$store.state.files))
       function toTree (subNodes) {
         var treeNodes = {};
         var rootNodes = [];
-        subNodes.forEach(function (node) {
+        var cloneNodes = _.cloneDeep(subNodes);
+        cloneNodes.forEach(function (node) {
           var path = node.path;
           var lastSeperateIndex = path.lastIndexOf(constants.FILE_SEPERATE);
           node.label = path.substring(lastSeperateIndex + 1);
