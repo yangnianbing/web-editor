@@ -1,0 +1,5 @@
+var wrap = {
+    request (req) {
+        
+    }
+}

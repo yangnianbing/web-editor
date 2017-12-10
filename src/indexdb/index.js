@@ -1,30 +1,21 @@
-export default db;
-var db = function (dbname) {
-    
-};
+var db = {}
 
-var request = window.indexedDB.open('ide');
+function createDB (dbName, version = 1) {
+    return new Promise((resolve, reject) => {
+        var requuest = window.indexedDB.open(name, version);
 
-request.onsuccess = (event) => {
-    alert("Why didn't you allow my web app to use IndexedDB?!");
+        request.onsuccess = (e) => {
+            resolve(e.target.result);
+        }
+
+        request.onerror = (e) => {
+            reject(e)
+        }
+    })
 }
 
-request.onerror = (event) => {
-    db = request.result;
-
-    db.onerror = function(event) {
-        alert("Database error: " + event.target.errorCode);
-    };
-}
-
-
-request.onupgradeneeded = function(event) { 
-    var db = event.target.result;
-
-
-};
-
-
-class db{
-    constructor
+function createStore (dbName, storeName, config) {
+    return new Promise((resolve, reject) => {
+        
+    })
 }
