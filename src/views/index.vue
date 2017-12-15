@@ -19,7 +19,20 @@
   import Layout from '../components/layout'
 
   import mockData from './mock'
+  import DB from 'dexie'
 
+  var db = new DB('FriendDatabase');
+  db.version(1).stores({
+    friends: '++id,name,age'
+  });
+
+  db.friends.add({name: 'Josephine', age: 21}).then(function () {
+    return db.friends.where('age').below(25).toArray();
+  }).then(function (youngFriends) {
+    alert('My young friends: ' + JSON.stringify(youngFriends));
+  }).catch(function (e) {
+    alert('Error: ' + (e.stack || e));
+  });
   export default{
     name: 'app',
     components: {Layout, FileTree, IdeMenu, Editor},

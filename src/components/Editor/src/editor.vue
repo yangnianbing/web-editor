@@ -46,9 +46,7 @@ export default{
   },
   methods: {
     ...mapMutations(['setFile']),
-    onMounted (editor) {
-      
-    }
+    onMounted (editor) {}
   },
   computed: {
     currentIndex () {

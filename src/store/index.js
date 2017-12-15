@@ -9,7 +9,7 @@ export default new Vuex.Store({
   // get by store.state.x
   // mapState
     $eventBus: $eventBus,
-    files: [],
+    files: []
   },
   mutations: {
     setFiles (state, files) {
