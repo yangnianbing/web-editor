@@ -1,0 +1,13 @@
+
+.themedark .part.titlebar{
+  background-color: rgb(80, 80, 80);
+  color: rgb(204, 204, 204)
+}
+
+.themedark .part.titlebar .menubar .menubar-menu-button{
+  background-color: rgb(80, 80, 80);
+  color: #cccccc
+}
+
+
+
