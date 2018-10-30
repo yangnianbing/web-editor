@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./themedark.css"/>
   <link rel="stylesheet" href="./index.css"/>
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_893070_d2bl83wb8m.css"/>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_893070_7z0yyav8p5i.css"/>
   <title>Document</title>
 </head>
 <body class="themedark" >
@@ -57,10 +57,81 @@
         <li class="activity-menu-item">
           <i class="iconfont icon-file"></i>
         </li>
+        <li class="activity-menu-item">
+          <i class="iconfont icon-sousuo"></i>
+        </li>
+        <li class="activity-menu-item">
+          <i class="iconfont icon-git-branch"></i>
+        </li>
+        <li class="activity-menu-item">
+          <i class="iconfont icon-debug"></i>
+        </li>
+        <li class="activity-menu-item">
+          <i class="iconfont icon-extension"></i>
+        </li>
+        <li class="activity-menu-item">
+          <i class="iconfont icon-folder"></i>
+        </li>
       </ul>
       <div class="activitybar-config"></div>
     </div>
-    <div class="part sidebar"></div>
+    <div class="part sidebar">
+      <div class="sidebar-title">
+        <div class="title-label">
+          <span>资源管理器</span>
+        </div>
+        <div class="title-actions"></div>
+      </div>
+      <div class="sidebar-content">
+        <div class="section open-file">
+          <div class="header expand">
+            <i class="expand-status iconfont icon-expand"></i>
+            <!-- <i class="expand-status iconfont icon-un-expand"></i> -->
+            <span>打开的编辑器</span>
+          </div>
+          <div class="content hide">
+              <ul>
+                <li><span>index.html</span></li>
+                <li><span>index.css</span></li>
+              </ul>
+          </div>
+        </div>
+        <div class="section file-tree">
+          <div class="header expand">
+            <i class="expand-status iconfont icon-expand"></i>
+            <span>CODE</span>
+          </div>
+          <div class="content hide">
+            <ul>
+              <li class="haschild">
+                <div class="wholerow"></div>
+                <i class="expand-status iconfont icon-expand"></i>
+                <span>1_github_source</span>
+                <ul>
+                  <li class="haschild">
+                    <div class="wholerow"></div>
+                    <i class="expand-status iconfont icon-expand"></i>
+                    <span>cyclejs</span>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="wholerow"></div>
+                <i class="expand-status iconfont icon-expand"></i>
+                <span>yarn.lock</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="section out-line">
+          <div class="header expand">
+            <i class="expand-status iconfont icon-expand"></i>
+            <span>大纲</span>
+          </div>
+          <div class="content hide"></div>
+        </div>
+      </div>
+    </div>
     <div class="part editor"></div>
     <div class="part panel bottom"></div>
     <div class="part statusbar"></div>
@@ -92,6 +163,34 @@
     function beFullScreen(){
       document.documentElement.webkitRequestFullScreen();
     }
+
+    function bindEvent(){
+      document.querySelector('.window-icon.window-max').addEventListener('click', function(evt){
+        toggleFullScreen();
+        toggleClass(evt.target, 'window-store');
+      })
+      
+      var $headers = document.querySelectorAll('.part.sidebar .sidebar-content .section .header');
+      $headers.forEach($header => {
+        $header.addEventListener('click', function(){
+          toggleClass($header.querySelector('.expand-status'), 'icon-expand')
+          toggleClass($header.nextElementSibling, 'hide');
+          toggleClass($header.querySelector('.expand-status'), 'icon-un-expand')
+        })
+      })
+
+     
+    }
+
+    function toggleClass($el, className){
+      if($el.classList.contains(className)){
+          $el.classList.remove(className)
+        }else{
+          $el.classList.add(className)
+        }
+    }
+
+    bindEvent();
   </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
   left: 0px;
   position: absolute;
   font-size: 13px;
+  color: #ccc;
 }
 
 .part{
@@ -95,7 +96,7 @@
   -webkit-mask: url('./source/chrome-maximize-dark.svg') no-repeat 50% 50%;
 }
 
-.part.titlebar .window-control-container .window-icon-bg .window-max.window.store{
+.part.titlebar .window-control-container .window-icon-bg .window-max.window-store{
   -webkit-mask: url('./source/chrome-restore-dark.svg') no-repeat 50% 50%;
 }
 
@@ -124,6 +125,17 @@
   color: rgba(255, 255, 255, 0.6)
 }
 
+.part.activitybar ul.activity-menu-container li.activity-menu-item{
+  text-align: center;
+  padding: 15px;
+}
+
+.part.activitybar ul.activity-menu-container li.activity-menu-item i{ 
+  height: 40px;
+  font-size: 25px;
+}
+
+
 .part.activitybar ul.activity-menu-container li.activity-menu-item:hover{ 
   color: rgba(255, 255, 255, 1)
 }
@@ -138,10 +150,56 @@
   background-color: rgb(39, 39, 39);
   width: 170px;
   top: 30px;
-  right: 1298px;
   bottom: 22px;
   left: 50px;
   position: absolute;
+}
+
+.part.sidebar .sidebar-title{
+  display: flex;
+  height: 35px;
+  line-height: 35px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+}
+
+.part.sidebar .sidebar-content .section .header{
+  height: 22px;
+  line-height: 22px;
+  padding: 0 5px;
+  font-size: 11px;
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.2)
+}
+
+.part.sidebar .sidebar-content .section .header i.expand-status{
+  font-size: 8px;
+}
+
+.part.sidebar .sidebar-content .section .content ul{
+  list-style: none;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+.part.sidebar .sidebar-content .section.open-file .content.hide{
+  display: none;
+}
+
+.part.sidebar .sidebar-content .section .content ul li{
+  height: 22px;
+  line-height: 22px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.part.sidebar .sidebar-content .section.open-file .content ul li:hover{
+  background-color: rgba(128, 128, 128, 0.2)
+}
+
+ul li .wholerow{
+  width: 100%;
 }
 /**sidebar end**/
 
