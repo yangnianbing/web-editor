@@ -1,3 +1,9 @@
+ul{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
 .workbench{
   top: 0px;
   right: 0px;
@@ -147,7 +153,7 @@
 
 /**sidebar begin**/
 .part.sidebar{
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(37, 37, 38);
   width: 170px;
   top: 30px;
   bottom: 22px;
@@ -183,7 +189,7 @@
   margin: 0 0;
 }
 
-.part.sidebar .sidebar-content .section.open-file .content.hide{
+.hide{
   display: none;
 }
 
@@ -198,8 +204,24 @@
   background-color: rgba(128, 128, 128, 0.2)
 }
 
+
+.part.sidebar .sidebar-content .section.file-tree .content ul li{
+  height: auto;
+  line-height: 22px;
+}
+
+.part.sidebar .sidebar-content .section.file-tree i.expand-status{
+  font-size: 8px;
+}
+
 ul li .wholerow{
   width: 100%;
+  position: absolute;
+  left: 0px;
+}
+
+ul li .wholerow:hover{
+  background-color: rgba(128, 128, 128, 0.2)
 }
 /**sidebar end**/
 
@@ -211,6 +233,65 @@ ul li .wholerow{
   left: 220px;
   bottom: 210px;
   position: absolute;
+}
+
+.part.editor .editor-container{
+  top: 57px;
+  right: 0px;
+  left:0px;
+  bottom: 0px;
+  position: absolute;
+}
+
+.part.editor .tabs{
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+  background-color: rgb(37, 37, 38)
+}
+
+.part.editor .tabs .file-tabs{
+  height: 35px;
+  line-height: 35px;
+  width: calc(100% - 100px);
+  display: flex;
+  overflow: hidden;
+}
+
+.part.editor .tabs .file-tabs .tab{
+  width: 120px;
+  background-color: rgb(45, 45, 45);
+  border-right: 1px solid rgb(37, 37, 38);
+  min-width: fit-content;
+  padding: 0 10px;
+}
+
+.part.editor .tabs .file-tabs .tab .icon-close{
+  float: right;
+}
+
+
+.part.editor .tabs .file-tabs .tab.selected{
+  background-color: rgb(30, 30, 30);
+  color: #fff;
+}
+
+.part.editor .tabs .file-actions{
+  height: 35px;
+  width: 100px;
+  display: flex;
+}
+
+.part.editor .tabs .breadcrumbs{
+  height: 22px;
+  display: flex;
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 0 10px;
+}
+
+.part.editor .tabs .breadcrumbs .icon-right{
+  margin: 0 1px;
 }
 /**editor end**/
 
@@ -224,6 +305,42 @@ ul li .wholerow{
   bottom: 22px;
   left: 220px;
   position: absolute;
+}
+
+.part.panel.bottom .tabs{
+  border-top: 1px solid rgba(128, 128, 128,  0.35);
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.part.panel.bottom .tabs .tab-list{
+  display: flex;
+  padding-left: 10px;
+}
+
+.part.panel.bottom .tabs ul.tab-list li{
+  font-size: 11px;
+  padding: 4px 10px 3px 12px;
+  line-height: 27px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.part.panel.bottom .tabs ul.tab-list li .label{
+  line-height: 27px;
+  height: 27px;
+  display: inline-block;
+}
+
+.part.panel.bottom .tabs ul.tab-list li:hover{
+  color: #fff;
+}
+
+.part.panel.bottom .tabs ul.tab-list li.selected .label{
+  color: #fff;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.35)
 }
 /**bottompanel end**/
 

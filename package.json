@@ -15,9 +15,11 @@
     "lintfix": "eslint --fix  --ext  .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "apollo-server": "^2.1.0",
     "axios": "^0.16.2",
     "dexie": "^2.0.1",
     "element-ui": "^2.0.7",
+    "graphql": "^14.0.2",
     "lodash.assign": "^4.2.0",
     "vue": "^2.3.3",
     "vue-grid-layout": "^2.1.9",
