@@ -1,12 +1,15 @@
 const path = require('path');
 const pty = require('node-pty');
 
-module.exports = class TerminalProcess {
+const EventEmitter = require('events');
+
+module.exports = class TerminalProcess extends EventEmitter {
     constructor (shellLaunchConfig, cwd, cols, rows, env) {
+        super();
         var options = {
             name: path.basename(shellLaunchConfig.executable),
             cwd,
-            env: process.env,
+            env,
             cols,
             rows
         }
@@ -20,10 +23,15 @@ module.exports = class TerminalProcess {
 
         var i = 0
         this._ptyProcess.on('data', (data) => {
-            console.log(data);
+            this.emit('processData', data)
         })
 
         this._ptyProcess.on('exit', (code) => {
+
         })
+    }
+
+    input(data){
+        this._ptyProcess.write(data);
     }
 };

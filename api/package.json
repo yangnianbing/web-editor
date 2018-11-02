@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-pty": "^0.7.8"
+    "koa": "^2.6.1",
+    "node-pty": "^0.7.8",
+    "socket.io": "^2.1.1"
   }
 }
