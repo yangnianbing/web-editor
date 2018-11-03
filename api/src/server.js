@@ -16,7 +16,7 @@ io.on('connect', socket => {
     console.log(socket);
     const terminalManager = new Terminal(socket);
     socket.on('init', data => {
-        terminalManager.createTerminalInstance({cols: 40, rows: 10});
+        terminalManager.createTerminalInstance({cols: data.cols, rows: data.rows});
         terminalManager.input({id:1, data:''})
     })
 
