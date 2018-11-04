@@ -1,0 +1,48 @@
+
+/**bottompanel begin**/
+.part.panel.bottom{
+  background-color: rgb(30, 30, 30);
+  border-left-color: rgba(128, 128, 128, 0.35);
+  height: 189px;
+  right: 0px;
+  bottom: 22px;
+  left: 220px;
+  position: absolute;
+}
+
+.part.panel.bottom .tabs{
+  border-top: 1px solid rgba(128, 128, 128,  0.35);
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.part.panel.bottom .tabs .tab-list{
+  display: flex;
+  padding-left: 10px;
+}
+
+.part.panel.bottom .tabs ul.tab-list li{
+  font-size: 11px;
+  padding: 4px 10px 3px 12px;
+  line-height: 27px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.part.panel.bottom .tabs ul.tab-list li .label{
+  line-height: 27px;
+  height: 27px;
+  display: inline-block;
+}
+
+.part.panel.bottom .tabs ul.tab-list li:hover{
+  color: #fff;
+}
+
+.part.panel.bottom .tabs ul.tab-list li.selected .label{
+  color: #fff;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.35)
+}
+/**bottompanel end**/

@@ -1,7 +1,0 @@
-1.eslint自动修复检查出来的问题
- "eslint --fix  --ext  .js,.vue src test/unit/specs test/e2e/specs"
-
-
- 2.在webpack打包的时候，可以在js文件中混用require和export。
- 但是不能混用import 以及module.exports。
- 一定要配对使用require和module.exports以及import和export default。

@@ -1,0 +1,36 @@
+
+/**activitybar begin**/
+.part.activitybar{
+  background-color: rgb(53, 53, 53);
+  position: absolute;
+  left: 0px;
+  bottom: 22px;
+  top:30px;
+  width: 50px;
+}
+
+.part.activitybar ul.activity-menu-container{ 
+  list-style: none;
+  margin: 0 auto;
+  padding: 0px;
+  color: rgba(255, 255, 255, 0.6)
+}
+
+.part.activitybar ul.activity-menu-container li.activity-menu-item{
+  text-align: center;
+  padding: 15px;
+}
+
+.part.activitybar ul.activity-menu-container li.activity-menu-item i{ 
+  height: 40px;
+  font-size: 25px;
+}
+
+
+.part.activitybar ul.activity-menu-container li.activity-menu-item:hover{ 
+  color: rgba(255, 255, 255, 1)
+}
+
+
+
+/**activitybar end**/

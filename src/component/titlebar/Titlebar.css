@@ -1,0 +1,94 @@
+/**titlebar begin**/
+.part.titlebar{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-shrink: 0px;
+  box-sizing: border-box;
+}
+
+.part.titlebar .logo{
+  width: 35px;
+  height: 100%;
+  position: relative;
+  z-index: 99;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 16px;
+  flex-shrink: 0;
+}
+
+.part.titlebar .menubar{
+  display: flex;
+  height: 30px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  font-family: "-apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,HelveticaNeue-Light,Noto Sans,Microsoft YaHei,PingFang SC,Hiragino Sans GB,Source Han Sans SC,Source Han Sans CN,Source Han Sans,sans-serif"
+}
+
+.part.titlebar .menubar .menubar-menu-button{
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 8px;
+  cursor: default;
+  -webkit-app-region: no-drag;
+  zoom: 1;
+  white-space: nowrap;
+}
+
+.part.titlebar .window-title{
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: auto;
+  zoom: 1;
+}
+
+.part.titlebar .window-control-container{
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+  position: relative;
+  z-index: 99;
+  height: 100%;
+  width: 138px;
+}
+
+.part.titlebar .window-control-container .window-icon-bg{
+  display: inline-block;
+  height: 100%;
+  width: 33.34%;
+}
+
+.part.titlebar .window-control-container .window-icon-bg .window-icon {
+  height: 100%;
+  width: 100%;
+  -webkit-mask-size: 23.1%;
+  background-color: #cccccc;
+}
+
+.part.titlebar .window-control-container .window-icon-bg .window-min{
+  -webkit-mask: url('../../resource/chrome-minimize-dark.svg') no-repeat 50% 50%;
+}
+
+.part.titlebar .window-control-container .window-icon-bg .window-max{
+  -webkit-mask: url('../../resource/chrome-maximize-dark.svg') no-repeat 50% 50%;
+}
+
+.part.titlebar .window-control-container .window-icon-bg .window-max.window-store{
+  -webkit-mask: url('../../resource/chrome-restore-dark.svg') no-repeat 50% 50%;
+}
+
+
+.part.titlebar .window-control-container .window-icon-bg .window-close{
+  -webkit-mask: url('../../resource/chrome-close-dark.svg') no-repeat 50% 50%;
+}
+/**titlebar end**/
+

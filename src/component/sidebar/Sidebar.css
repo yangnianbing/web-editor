@@ -1,0 +1,73 @@
+/**sidebar begin**/
+.part.sidebar{
+  background-color: rgb(37, 37, 38);
+  width: 170px;
+  top: 30px;
+  bottom: 22px;
+  left: 50px;
+  position: absolute;
+}
+
+.part.sidebar .sidebar-title{
+  display: flex;
+  height: 35px;
+  line-height: 35px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 11px;
+}
+
+.part.sidebar .sidebar-content .section .header{
+  height: 22px;
+  line-height: 22px;
+  padding: 0 5px;
+  font-size: 11px;
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.2)
+}
+
+.part.sidebar .sidebar-content .section .header i.expand-status{
+  font-size: 8px;
+}
+
+.part.sidebar .sidebar-content .section .content ul{
+  list-style: none;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+.hide{
+  display: none;
+}
+
+.part.sidebar .sidebar-content .section .content ul li{
+  height: 22px;
+  line-height: 22px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.part.sidebar .sidebar-content .section.open-file .content ul li:hover{
+  background-color: rgba(128, 128, 128, 0.2)
+}
+
+
+.part.sidebar .sidebar-content .section.file-tree .content ul li{
+  height: auto;
+  line-height: 22px;
+}
+
+.part.sidebar .sidebar-content .section.file-tree i.expand-status{
+  font-size: 8px;
+}
+
+ul li .wholerow{
+  width: 100%;
+  position: absolute;
+  left: 0px;
+}
+
+ul li .wholerow:hover{
+  background-color: rgba(128, 128, 128, 0.2)
+}
+/**sidebar end**/
