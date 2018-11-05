@@ -23,7 +23,6 @@ export default class  Sidebar extends Component {
                 ({loading, error, data}) => {
                   if(loading) return <p>loading</p>
                   if(error) return <p>error</p>
-                  console.log(data.files);
                   return <div class="part sidebar">
                           <div class="sidebar-title">
                             <div class="title-label">
@@ -52,17 +51,11 @@ export default class  Sidebar extends Component {
                               <div class="content">
                                 <ul>
                                   {
-                                    data.files.map(file =>  <li class="{file.isDirectory}">
+                                    data.files.map((file, index) =>  <li key={index} onClick={this.expand.bind(this, file)}>
                                       <div class="wholerow">&nbsp;</div>
-                                      <i class="expand-status iconfont icon-expand"></i>
+                                      {file.isDirectory == true ? <i class="expand-status iconfont icon-expand"></i> : ''}
+                                      {file.isDirectory == false ? <i class="file-icon iconfont icon-file"></i> : ''}
                                       <span>{file.name}</span>
-                                      <ul>
-                                        <li class="haschild">
-                                          <div class="wholerow">&nbsp;</div>
-                                          <i class="expand-status iconfont icon-expand"></i>
-                                          <span>cyclejs</span>
-                                        </li>
-                                      </ul>
                                     </li>)
                                   }
                                 </ul>
@@ -81,5 +74,10 @@ export default class  Sidebar extends Component {
               }
             </Query>
    
+  }
+  expand(file, status){
+    if(file.isDirectory === true){
+      
+    }
   }
 }
