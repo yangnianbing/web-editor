@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
-import gql from "graphql-tag"
-import {Query} from 'react-apollo'
-
 import './Sidebar.css'
-
-import {queryFiles} from './query'
 import Tree from './Tree';
 
 export default class  Sidebar extends Component {

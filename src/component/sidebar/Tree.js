@@ -5,15 +5,16 @@ import TreeNode from './TreeNode'
 
 export default class Tree extends Component{
     state = {
-        fils: [],
-        path: ''
+        file: {name: '#'},
+        ...this.props
     }
     render(){
-        return <Query query={queryFiles}>
+        return <Query query={queryFiles} variables={this.state.file}>
                 {
-                      ({loading, error, data, refetch, client}) => {
+                      ({loading, error, data}) => {
                         if(loading) return <p>loading</p>
                         if(error) return <p>error</p>
+                        this.state.file.children = data.files;
                         return <ul> {data.files.map((file, index) => <TreeNode file={file} key={index}></TreeNode>) }</ul>
                       }
                 }

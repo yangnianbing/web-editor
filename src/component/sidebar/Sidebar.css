@@ -43,8 +43,11 @@
 .part.sidebar .sidebar-content .section .content ul li{
   height: 22px;
   line-height: 22px;
-  padding: 0 15px;
+  padding: 0 0 0 15px;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .part.sidebar .sidebar-content .section.open-file .content ul li:hover{
