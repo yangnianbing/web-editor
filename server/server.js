@@ -24,7 +24,7 @@ module.exports = function(param){
     }
 
     type Mutation {
-      file(name: String): Response
+      updateFileContent(file: String): Response
     }
   `
 
@@ -53,7 +53,11 @@ module.exports = function(param){
       }
     },
     Mutation: {
-      file: (path) => {
+      updateFileContent: (root, {file}, context, info) => {
+        let fileObj = JSON.parse(file);
+        if(fs.existsSync(fileObj.path)){
+          fs.writeFileSync(fileObj.path, fileObj.content)
+        }
         return {
           status:0
         }

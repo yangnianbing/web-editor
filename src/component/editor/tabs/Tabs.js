@@ -9,10 +9,20 @@ export default class Tabs extends Component{
         return <div class="file-tabs">
             {
                 this.state.files.map((file, index) => {
-                    return <Tab file={file} key={index}></Tab>
+                    return <Tab file={file} key={index} closeFile={this.closeFile}></Tab>
                 })
             }
         </div>
+    }
+    closeFile(file){
+        if(file.hasChange){
+            var  confirm = confirm('该文件已修改，是否保存？');
+            if(confirm){
+                eventBus.emit('save.file', {file: file});
+            }else{
+
+            }
+        }
     }
     componentDidMount(){
         var $component = this;
@@ -40,6 +50,7 @@ export class Tab extends Component{
         return <div className={this.props.file.show ? 'tab selected' : 'tab'}>
             <i></i>
             <span>{this.props.file.name}</span>
+            <i class="iconfont icon-close" onClick={this.props.closeFile.bind(this, this.props.file)}></i>
         </div>
     }
 }
