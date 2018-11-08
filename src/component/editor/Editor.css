@@ -14,6 +14,11 @@
     bottom: 0px;
     position: absolute;
   }
+
+  .part.editor .editor-container .edit-instance{
+    height: 100%;
+    width: 100%;
+  }
   
   .part.editor .tabs{
     display: flex;
