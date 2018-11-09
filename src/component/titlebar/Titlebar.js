@@ -38,13 +38,51 @@ class Titlebar extends Component {
           <div class="window-icon window-min"></div>
         </div>
         <div class="window-icon-bg">
-          <div class="window-icon window-max"></div>
+          <div class="window-icon window-max" onClick={this.windowMax.bind(this)}></div>
         </div>
         <div class="window-icon-bg">
           <div class="window-icon window-close"></div>
         </div>
       </div>
     </div>
+  }
+
+  windowMax(evt){
+    toggleFullScreen();
+    toggleClass(evt.target, 'window-store');
+    function toggleFullScreen(){
+      if(canFullScreen()){
+        if(isFullScreen()){
+          cancelFullScreen();
+        }else{
+          beFullScreen()
+        }
+      }
+    }
+
+    function toggleClass($el, className){
+      if($el.classList.contains(className)){
+          $el.classList.remove(className)
+        }else{
+          $el.classList.add(className)
+        }
+    }
+
+    function canFullScreen(){
+      return document.webkitFullscreenEnabled;
+    }
+
+    function isFullScreen(){
+      return document.webkitIsFullScreen;
+    }
+
+    function cancelFullScreen(){
+      document.webkitCancelFullScreen();
+    }
+
+    function beFullScreen(){
+      document.documentElement.webkitRequestFullScreen();
+    }
   }
 }
 
