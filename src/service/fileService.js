@@ -11,13 +11,6 @@ const updateFileContentFragment = gql`
     }
 `
 
-// export {
-//     updateFileContentfunction(file){
-
-//     }
-// }
-
-
 export var updateFileContent = function(file){
     return client.mutate({
         mutation: updateFileContentFragment,

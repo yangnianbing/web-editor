@@ -9,9 +9,19 @@ class EventBus{
             return;
         }
 
+        var handlers = []
         handlerList.forEach(handler => {
-            handler.apply(this, params);
+            handlers.push(exec(handler, params));
         })
+
+        return Promise.all(handlers);
+
+        function exec(handler, params){
+            return new Promise(async (resolve, reject) => {
+                var result = await handler.apply(this, params)
+                resolve(result);
+            })
+        }
     }
 
     on(eventName, fn){
