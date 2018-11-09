@@ -1,5 +1,7 @@
 
 /**bottompanel begin**/
+
+
 .part.panel.bottom{
   background-color: rgb(30, 30, 30);
   border-left-color: rgba(128, 128, 128, 0.35);
@@ -45,4 +47,12 @@
   color: #fff;
   border-bottom: 1px solid rgba(128, 128, 128, 0.35)
 }
+
+.part.panel.bottom .content{
+  height: calc(100% - 36px);
+}
+
+#terminal{
+  height: 100%;
+} 
 /**bottompanel end**/

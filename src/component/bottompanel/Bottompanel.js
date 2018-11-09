@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './Bottompanel.css'
 
+import TerminalInstance from './Terminal/Terminal'
+
 
 export default class Bottompanel extends Component{
   render(){
@@ -15,7 +17,7 @@ export default class Bottompanel extends Component{
               </div>
             </div>
             <div class="content">
-
+              <TerminalInstance></TerminalInstance>
             </div>
           </div>
   }

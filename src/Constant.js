@@ -1,5 +1,9 @@
 export var EVENTNAEM = {
-    OPENFILE:'open.file'
+    OPEN_FILE:'open.file',
+    CLOSE_FILE: 'close.file',
+    SAVE_FILE: 'save.file',
+    OPEN_TAB:'open.tab',
+    CLOSE_TAB:'close.tab'
 }
 
 export var FILETYPE = {

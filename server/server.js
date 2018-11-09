@@ -2,6 +2,7 @@ const {ApolloServer, gql} = require('apollo-server');
 const fs = require('fs');
 const pathLib = require('path');
 
+
 module.exports = function(param){
   var baseDir = param.directory ? param.directory : './';
   const typeDefs = gql`
