@@ -1,5 +1,5 @@
 import client from "../ApolloClient";
-import {updateFileContentFragment} from 'graphql';
+import {updateFileContentFragment} from './graphql';
 
 
 export var updateFileContent = function(file){

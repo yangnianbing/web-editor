@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Titlebar.css';
+import util from '@yangnb/jsutil_'
 
 
 class Titlebar extends Component {
@@ -49,7 +50,7 @@ class Titlebar extends Component {
 
   windowMax(evt){
     toggleFullScreen();
-    toggleClass(evt.target, 'window-store');
+    util.toggleClass(evt.target, 'window-store');
     function toggleFullScreen(){
       if(canFullScreen()){
         if(isFullScreen()){
@@ -58,14 +59,6 @@ class Titlebar extends Component {
           beFullScreen()
         }
       }
-    }
-
-    function toggleClass($el, className){
-      if($el.classList.contains(className)){
-          $el.classList.remove(className)
-        }else{
-          $el.classList.add(className)
-        }
     }
 
     function canFullScreen(){

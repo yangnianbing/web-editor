@@ -2,7 +2,7 @@ import gql from "graphql-tag"
 
 
 
-export const queryFilesFragnebt = gql`
+export const queryFilesFragment = gql`
     query Files($path: String="")  {
         files(path: $path) {
             name,
