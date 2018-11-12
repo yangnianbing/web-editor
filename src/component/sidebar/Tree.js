@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {queryFiles} from './query'; 
+import {queryFilesFragment} from '../../service/graphql'; 
 import {Query} from 'react-apollo'
 import TreeNode from './TreeNode'
 
@@ -9,7 +9,7 @@ export default class Tree extends Component{
         ...this.props
     }
     render(){
-        return <Query query={queryFiles} variables={this.state.file}>
+        return <Query query={queryFilesFragment} variables={this.state.file}>
                 {
                       ({loading, error, data}) => {
                         if(loading) return <p>loading</p>

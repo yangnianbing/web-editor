@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import util from '@yangnb/jsutil_'
 import Tree from './Tree';
 import eventBus from '../../eventBus'
-import {queryFileContent} from './query'; 
+import {queryFileContentFragment} from '../../service/graphql'; 
 import PropTypes from 'prop-types'
 
 
@@ -55,7 +55,7 @@ export default class TreeNode extends Component{
     
         function fileClick(){
             $component.context.client.query({
-                query: queryFileContent,
+                query: queryFileContentFragment,
                 variables: $component.state.file
             }).then(({data}) => {
                 $component.state.file.content = data.fileContent.content

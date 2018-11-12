@@ -1,15 +1,6 @@
-import gql from "graphql-tag"
 import client from "../ApolloClient";
+import {updateFileContentFragment} from 'graphql';
 
-
-
-const updateFileContentFragment = gql`
-    mutation updateFileContent($file: String!){
-        updateFileContent(file: $file){
-            status
-        }
-    }
-`
 
 export var updateFileContent = function(file){
     return client.mutate({
