@@ -8,10 +8,14 @@ module.exports = function(param){
   const typeDefs = gql`
     type Query {
       files(path: String): [File],
-      fileContent(path: String) : File
+      fileContent(path: String) : File,
+      baseDir: Path
     }
 
-
+    type Path{
+      path: String
+      name: String
+    }
 
     type File {
       name: String
@@ -51,6 +55,14 @@ module.exports = function(param){
           return "";
         }
         return {content: fs.readFileSync(path, {encoding:'utf-8'})};
+      },
+
+      baseDir(){
+        var absolutePath = pathLib.resolve(baseDir);
+        return {
+          path: absolutePath,
+          name: pathLib.parse(absolutePath).name
+        }
       }
     },
     Mutation: {

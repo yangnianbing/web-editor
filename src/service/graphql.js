@@ -27,3 +27,12 @@ export const updateFileContentFragment = gql`
         }
     }
 `
+
+export const baseDir = gql`
+    query baseDir{
+        baseDir{
+            path,
+            name
+        }
+    }
+`
