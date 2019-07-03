@@ -49,7 +49,7 @@ export default class TreeNode extends Component{
         }
     
         function directoryClick(){
-          util.toggleStatus($component.state.file, 'status', [STATUS_EXPAND, STATUS_UN_EXPAND]);
+          util.toggleAttr($component.state.file, 'status', [STATUS_EXPAND, STATUS_UN_EXPAND]);
           $component.setState({file:$component.state.file});
         }
     
