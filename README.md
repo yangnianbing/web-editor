@@ -3,7 +3,7 @@
 ![](http://ww1.sinaimg.cn/large/006rHsX4ly1fx1yydgzybj31hc0swwfl.jpg)
 最大化，看起来是不是和vscode很像
 
-1. 运行服务端  
+1. 运行服务端   
 ```shell
 node ./server/index.js
 ```
