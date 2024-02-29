@@ -1,7 +1,7 @@
 ![](http://ww1.sinaimg.cn/large/006rHsX4ly1fx1za18v3uj31hc0t3di7.jpg)
 浏览器里面的vscode,有木有很高仿
 ![](http://ww1.sinaimg.cn/large/006rHsX4ly1fx1yydgzybj31hc0swwfl.jpg)
-最大化，看起来是不是和vscode很像
+最大化，看起来是不是和vscode很像 
 
 1. 运行服务端    
 ```shell
